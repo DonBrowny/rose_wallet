@@ -12,8 +12,10 @@ class SMSModule(context: ReactApplicationContext) : ReactContextBaseJavaModule(c
     }
 
     @ReactMethod
-    fun getAllMessages(callback: Callback) {
-        val cursor = reactContext.contentResolver.query(Sms.Inbox.CONTENT_URI, null, null, null)
+    fun getAllMessages(dateFrom: String, callback: Callback) {
+        val selection = Sms.Inbox.DATE + " > ?"
+        val selectionArgs = arrayOf(dateFrom)
+        val cursor = reactContext.contentResolver.query(Sms.Inbox.CONTENT_URI, null, selection, selectionArgs, null)
         val messages = Arguments.createArray()
 
         if(cursor != null) {
