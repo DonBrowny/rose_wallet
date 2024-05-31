@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Button, NativeModules } from 'react-native'
+import { Button, NativeModules, StyleSheet, View } from 'react-native'
 import { request, PERMISSIONS } from 'react-native-permissions'
+import uuid from 'react-native-uuid'
 import type { Message, MessageWithTransaction } from '../schema/sms'
 import { getTransactionAmount, getTransactionType, processMessage } from '../utils/sms-parser'
-import { SmsList } from './sms-list'
+import { SmsSwipe } from './sms-swipe'
 
 const requestPermission = async () => {
   const response = await request(PERMISSIONS.ANDROID.READ_SMS)
@@ -40,7 +41,7 @@ export const SmsReader = () => {
           if (transactionType && transactionType === 'debit') {
             const amount = getTransactionAmount(processedMessage)
             if (amount) {
-              return { body, date, amount: getTransactionAmount(processedMessage) }
+              return { id: uuid.v4().toString(), body, date, amount: getTransactionAmount(processedMessage) }
             }
             return []
           }
@@ -55,12 +56,21 @@ export const SmsReader = () => {
   }, [hasPermission])
 
   return (
-    <>
-      <Button
-        title='Retrieve SMS'
-        onPress={buttonPressHandler}
-      />
-      <SmsList data={transactions} />
-    </>
+    <View style={styles.container}>
+      <View>
+        <Button
+          title='Retrieve SMS'
+          onPress={buttonPressHandler}
+        />
+      </View>
+      <SmsSwipe data={transactions} />
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 12,
+  },
+})

@@ -25,10 +25,7 @@ export const SmsItem = ({ transaction }: SmsItemProps) => {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: '#f9c2ff',
     padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
   },
   title: {
     fontSize: 32,
@@ -41,7 +38,7 @@ const styles = StyleSheet.create({
   amount: {
     fontSize: 24,
     color: 'black',
-    fontWeight: 900,
+    fontWeight: 400,
   },
   buttonRow: {
     flex: 1,
