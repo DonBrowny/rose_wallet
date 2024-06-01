@@ -4,8 +4,9 @@ import { light } from '../../theme/color'
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    display: 'flex',
     justifyContent: 'center',
+    flexDirection: 'column',
   },
   cardStyle: {
     width: '100%',
@@ -24,5 +25,11 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: 250,
     borderRadius: 16,
+  },
+  progressView: {
+    height: 8,
+    marginTop: 22,
+    marginBottom: 16,
+    borderRadius: 12,
   },
 })
