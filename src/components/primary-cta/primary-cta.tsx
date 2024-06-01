@@ -1,5 +1,5 @@
 import { Animated, Pressable, PressableProps, Text, View } from 'react-native'
-import React from 'react'
+import React, { useRef } from 'react'
 import { styles } from './primary-cta.styles'
 
 interface PrimaryCtaProps extends PressableProps {
@@ -7,27 +7,27 @@ interface PrimaryCtaProps extends PressableProps {
 }
 
 export const PrimaryCta = ({ text, onPress }: PrimaryCtaProps) => {
-  const animation = new Animated.Value(0)
-  const inputRange = [0, 1]
-  const outputRange = [1, 0.9]
-  const scale = animation.interpolate({ inputRange, outputRange })
+  const scaleValue = useRef(new Animated.Value(1)).current
 
-  const onPressIn = () => {
-    Animated.spring(animation, {
+  function onPressIn() {
+    Animated.spring(scaleValue, {
+      toValue: 0.95,
+      useNativeDriver: true,
+    }).start()
+  }
+
+  function onPressOut() {
+    Animated.spring(scaleValue, {
       toValue: 1,
+      friction: 3,
+      tension: 50,
       useNativeDriver: true,
     }).start()
   }
 
-  const onPressOut = () => {
-    Animated.spring(animation, {
-      toValue: 0,
-      useNativeDriver: true,
-    }).start()
-  }
   return (
     <View>
-      <Animated.View style={[styles.container, { transform: [{ scale }] }]}>
+      <Animated.View style={[styles.container, { transform: [{ scale: scaleValue }] }]}>
         <Pressable
           onPressIn={onPressIn}
           onPressOut={onPressOut}
