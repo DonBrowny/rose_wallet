@@ -74,8 +74,8 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
         progress={data?.length === 0 ? 0 : processedCount / data.length}
         borderRadius={12}
         borderWidth={0}
-        unfilledColor={'#7B8186'}
-        color={light.colors.successColor100}
+        unfilledColor={light.colors.primaryColor200}
+        color={light.colors.successSecondaryColor}
         useNativeDriver
       />
     </View>
