@@ -1,8 +1,10 @@
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import React, { useCallback, useRef } from 'react'
 import { Swiper, type SwiperCardRefType } from 'rn-swiper-list'
-import type { MessageWithTransaction } from '../schema/sms'
-import { SmsItem } from './sms-item'
+import type { MessageWithTransaction } from '../../schema/sms'
+import { SmsItem } from '../sms-item/sms-item'
+import { light } from '../../theme/color'
+import { styles } from './sms-swipe.styles'
 
 type SmsSwipeProps = { data: MessageWithTransaction[] }
 
@@ -17,7 +19,7 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
         style={[
           styles.overlayLabelContainer,
           {
-            backgroundColor: 'green',
+            backgroundColor: light.colors.successColor,
           },
         ]}
       />
@@ -29,7 +31,7 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
         style={[
           styles.overlayLabelContainer,
           {
-            backgroundColor: 'red',
+            backgroundColor: light.colors.dangerColor,
           },
         ]}
       />
@@ -56,27 +58,3 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  cardStyle: {
-    width: '100%',
-    height: 250,
-    borderRadius: 16,
-    backgroundColor: '#f9c2ff',
-  },
-  subContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  overlayLabelContainer: {
-    width: '100%',
-    height: 250,
-    borderRadius: 16,
-  },
-})

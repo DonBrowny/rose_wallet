@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Button, NativeModules, StyleSheet, View } from 'react-native'
+import { NativeModules, View } from 'react-native'
 import { request, PERMISSIONS } from 'react-native-permissions'
-import uuid from 'react-native-uuid'
-import type { Message, MessageWithTransaction } from '../schema/sms'
-import { getTransactionAmount, getTransactionType, processMessage } from '../utils/sms-parser'
-import { SmsSwipe } from './sms-swipe'
+import type { Message, MessageWithTransaction } from '../../schema/sms'
+import { getTransactionAmount, getTransactionType, processMessage } from '../../utils/sms-parser'
+import { SmsSwipe } from '../sms-swipe/sms-swipe'
+import { PrimaryCta } from '../primary-cta/primary-cta'
+import { styles } from './sms-reader.styles'
 
 const requestPermission = async () => {
   const response = await request(PERMISSIONS.ANDROID.READ_SMS)
@@ -35,13 +36,13 @@ export const SmsReader = () => {
       setIsLoading(true)
       NativeModules.SMSModule.getAllMessages(String(thirtyDaysAgo), (messages: Message[]) => {
         const messageWithTransaction = messages.flatMap((message: Message) => {
-          const { body, date } = message
+          const { id, body, date } = message
           const processedMessage = processMessage(body)
           const transactionType = getTransactionType(processedMessage)
           if (transactionType && transactionType === 'debit') {
             const amount = getTransactionAmount(processedMessage)
             if (amount) {
-              return { id: uuid.v4().toString(), body, date, amount: getTransactionAmount(processedMessage) }
+              return { ...message, amount: getTransactionAmount(processedMessage) }
             }
             return []
           }
@@ -57,20 +58,11 @@ export const SmsReader = () => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Button
-          title='Retrieve SMS'
-          onPress={buttonPressHandler}
-        />
-      </View>
       <SmsSwipe data={transactions} />
+      <PrimaryCta
+        text='Retrieve SMS'
+        onPress={buttonPressHandler}
+      />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 12,
-  },
-})

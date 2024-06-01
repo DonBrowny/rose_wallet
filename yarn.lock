@@ -8011,13 +8011,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-uuid@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "react-native-uuid@npm:2.0.2"
-  checksum: 149f65549132a240ac237f4db34063fd08473e4b3a9b5958e3d0d6722cf10754efb222b1c6085a3dc42e0718ca9575b38cd5535ae83a96534dde0f54d343e915
-  languageName: node
-  linkType: hard
-
 "react-native@npm:0.74.1":
   version: 0.74.1
   resolution: "react-native@npm:0.74.1"
@@ -8435,7 +8428,6 @@ __metadata:
     react-native-gesture-handler: ^2.16.2
     react-native-permissions: ^4.1.5
     react-native-reanimated: ^3.11.0
-    react-native-uuid: ^2.0.2
     react-test-renderer: 18.2.0
     rn-swiper-list: ^2.0.2
     typescript: 5.0.4
