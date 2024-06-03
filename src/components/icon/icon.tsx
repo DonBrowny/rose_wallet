@@ -4,7 +4,7 @@ import { IconMap } from './icon-map'
 import Reload from '../../../assets/reload.svg'
 
 type IconMapKeyType = keyof typeof IconMap
-type IconProps = { name: IconMapKeyType; size?: number | string; fill: string; style?: StyleProp<ViewStyle> }
+export type IconProps = { name: IconMapKeyType; size?: number | string; fill?: string; style?: StyleProp<ViewStyle> }
 
 export const Icon = ({ name, size = 24, fill = '#000', style }: IconProps) => {
   const Component = IconMap[name]

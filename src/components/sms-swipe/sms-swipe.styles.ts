@@ -14,6 +14,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
+  actionCtaContainer: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'space-between',
+    marginTop: 16,
+    paddingHorizontal: 28,
+  },
   cardStyle: {
     height: CARD_HEIGHT,
     borderRadius: 24,

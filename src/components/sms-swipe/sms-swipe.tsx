@@ -6,6 +6,7 @@ import type { MessageWithTransaction } from '../../schema/sms'
 import { SmsItem } from '../sms-item/sms-item'
 import { light } from '../../theme/color'
 import { styles } from './sms-swipe.styles'
+import { IconCta } from '../icon-cta/icon-cta'
 
 type SmsSwipeProps = { data: MessageWithTransaction[] }
 
@@ -14,6 +15,19 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
   const ref = useRef<SwiperCardRefType>()
   const renderCard = useCallback((message: MessageWithTransaction) => {
     return <SmsItem transaction={message} />
+  }, [])
+
+  const onSwipeRightPress = useCallback(() => {
+    ref.current?.swipeRight()
+  }, [])
+
+  const onSwipeLeftPress = useCallback(() => {
+    ref.current?.swipeLeft()
+  }, [])
+
+  const onUndoPress = useCallback(() => {
+    setProcessedCount((currentState) => currentState - 1)
+    ref.current?.swipeBack()
   }, [])
 
   const swipeRightHandler = useCallback((cardIndex: number) => {
@@ -64,6 +78,22 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
           OverlayLabelRight={OverlayLabelRight}
           OverlayLabelLeft={OverlayLabelLeft}
           disableTopSwipe
+        />
+      </View>
+
+      <View style={styles.actionCtaContainer}>
+        <IconCta
+          name={'cross'}
+          onPress={onSwipeLeftPress}
+        />
+        <IconCta
+          name={'reload'}
+          onPress={onUndoPress}
+          disabled={processedCount === 0}
+        />
+        <IconCta
+          name={'check'}
+          onPress={onSwipeRightPress}
         />
       </View>
 

@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native'
 import { light } from '../../theme/color'
 
+export type PrimaryCtaStyleProps = { disabled: boolean | null }
+
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
