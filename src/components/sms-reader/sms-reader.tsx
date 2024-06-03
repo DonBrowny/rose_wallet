@@ -6,6 +6,7 @@ import { getTransactionAmount, getTransactionType, processMessage } from '../../
 import { SmsSwipe } from '../sms-swipe/sms-swipe'
 import { PrimaryCta } from '../primary-cta/primary-cta'
 import { styles } from './sms-reader.styles'
+import { SmsContainer } from '../sms-container/sms-container'
 
 const requestPermission = async () => {
   const response = await request(PERMISSIONS.ANDROID.READ_SMS)
@@ -21,7 +22,7 @@ var thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000
 export const SmsReader = () => {
   const [hasPermission, setHasPermission] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [transactions, setTransactions] = useState<MessageWithTransaction[]>([])
+  const [transactions, setTransactions] = useState<MessageWithTransaction[] | null>(null)
 
   useEffect(() => {
     async function getPermission() {
@@ -36,7 +37,7 @@ export const SmsReader = () => {
       setIsLoading(true)
       NativeModules.SMSModule.getAllMessages(String(thirtyDaysAgo), (messages: Message[]) => {
         const messageWithTransaction = messages.flatMap((message: Message) => {
-          const { id, body, date } = message
+          const { body } = message
           const processedMessage = processMessage(body)
           const transactionType = getTransactionType(processedMessage)
           if (transactionType && transactionType === 'debit') {
@@ -48,7 +49,7 @@ export const SmsReader = () => {
           }
           return []
         })
-        setTransactions(messageWithTransaction)
+        setTransactions(messageWithTransaction || [])
         setIsLoading(false)
       })
     } else {
@@ -58,7 +59,7 @@ export const SmsReader = () => {
 
   return (
     <View style={styles.container}>
-      <SmsSwipe data={transactions} />
+      <SmsContainer data={transactions} />
       <PrimaryCta
         text='Retrieve SMS'
         onPress={buttonPressHandler}

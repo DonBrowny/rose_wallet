@@ -4,6 +4,7 @@ export const light = {
     primaryColor: '#2C14DD',
     primaryColor100: '#DFE7FD',
     primaryColor200: '#E4EEF9',
+    primaryColor300: '#240F51',
     successColor: '#00A86B',
     successSecondaryColor: '#03E23B',
     successColor100: '#32FC65',
