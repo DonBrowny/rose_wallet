@@ -14,10 +14,12 @@ const requestPermission = async () => {
 }
 
 // Current timestamp
-var now = Date.now()
+const now = Date.now()
 
 // Calculate timestamp for 30 days ago
-var thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000
+// const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000
+const twoDaysAgo = now - 2 * 24 * 60 * 60 * 1000
+const fromDate = twoDaysAgo
 
 export const SmsReader = () => {
   const [hasPermission, setHasPermission] = useState(false)
@@ -35,7 +37,7 @@ export const SmsReader = () => {
   const buttonPressHandler = useCallback(() => {
     if (hasPermission) {
       setIsLoading(true)
-      NativeModules.SMSModule.getAllMessages(String(thirtyDaysAgo), (messages: Message[]) => {
+      NativeModules.SMSModule.getAllMessages(String(fromDate), (messages: Message[]) => {
         const messageWithTransaction = messages.flatMap((message: Message) => {
           const { body } = message
           const processedMessage = processMessage(body)

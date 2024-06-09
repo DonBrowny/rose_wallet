@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 import React, { useCallback, useRef, useState } from 'react'
 import { Swiper, type SwiperCardRefType } from 'rn-swiper-list'
 import { Bar } from 'react-native-progress'
@@ -7,6 +7,7 @@ import { SmsItem } from '../sms-item/sms-item'
 import { light } from '../../theme/color'
 import { styles } from './sms-swipe.styles'
 import { IconCta } from '../icon-cta/icon-cta'
+import { DoneAnimation } from './done-animation/done-animation'
 
 type SmsSwipeProps = { data: MessageWithTransaction[] }
 
@@ -16,6 +17,8 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
   const renderCard = useCallback((message: MessageWithTransaction) => {
     return <SmsItem transaction={message} />
   }, [])
+
+  const isAllTransactionsProcessed = processedCount === data.length
 
   const onSwipeRightPress = useCallback(() => {
     ref.current?.swipeRight()
@@ -68,23 +71,28 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
-        <Swiper
-          ref={ref}
-          cardStyle={styles.cardStyle}
-          data={data}
-          renderCard={renderCard}
-          onSwipeRight={swipeRightHandler}
-          onSwipeLeft={swipeLeftHandler}
-          OverlayLabelRight={OverlayLabelRight}
-          OverlayLabelLeft={OverlayLabelLeft}
-          disableTopSwipe
-        />
+        {isAllTransactionsProcessed ? (
+          <DoneAnimation />
+        ) : (
+          <Swiper
+            ref={ref}
+            cardStyle={styles.cardStyle}
+            data={data}
+            renderCard={renderCard}
+            onSwipeRight={swipeRightHandler}
+            onSwipeLeft={swipeLeftHandler}
+            OverlayLabelRight={OverlayLabelRight}
+            OverlayLabelLeft={OverlayLabelLeft}
+            disableTopSwipe
+          />
+        )}
       </View>
 
       <View style={styles.actionCtaContainer}>
         <IconCta
           name={'cross'}
           onPress={onSwipeLeftPress}
+          disabled={isAllTransactionsProcessed}
         />
         <IconCta
           name={'reload'}
@@ -94,6 +102,7 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
         <IconCta
           name={'check'}
           onPress={onSwipeRightPress}
+          disabled={isAllTransactionsProcessed}
         />
       </View>
 
