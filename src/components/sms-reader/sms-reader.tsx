@@ -3,7 +3,6 @@ import { NativeModules, View } from 'react-native'
 import { request, PERMISSIONS } from 'react-native-permissions'
 import type { Message, MessageWithTransaction } from '../../schema/sms'
 import { getTransactionAmount, getTransactionType, processMessage } from '../../utils/sms-parser'
-import { SmsSwipe } from '../sms-swipe/sms-swipe'
 import { PrimaryCta } from '../primary-cta/primary-cta'
 import { styles } from './sms-reader.styles'
 import { SmsContainer } from '../sms-container/sms-container'
@@ -17,9 +16,8 @@ const requestPermission = async () => {
 const now = Date.now()
 
 // Calculate timestamp for 30 days ago
-// const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000
-const twoDaysAgo = now - 2 * 24 * 60 * 60 * 1000
-const fromDate = twoDaysAgo
+const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000
+const fromDate = thirtyDaysAgo
 
 export const SmsReader = () => {
   const [hasPermission, setHasPermission] = useState(false)
