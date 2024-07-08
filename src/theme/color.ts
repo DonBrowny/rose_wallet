@@ -13,5 +13,8 @@ export const light = {
     ctaColor: '#7F3DFF',
     textPrimary: '#212325',
     textSecondary: '#5C616F',
+    blue100: '#E5F9FE',
+    blue500: '#0093B9',
+    blue900: '#0E0646',
   },
 }

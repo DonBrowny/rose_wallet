@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import { light } from '../../theme/color'
 
-const CARD_HEIGHT = 500
+const CARD_HEIGHT = 250
 
 export const styles = StyleSheet.create({
   container: {

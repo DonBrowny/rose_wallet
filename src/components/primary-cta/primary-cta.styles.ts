@@ -8,11 +8,11 @@ export const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 100,
     backgroundColor: light.colors.primaryColor,
+    height: 62,
   },
   cta: {
     width: '100%',
-    height: 62,
-    padding: 8,
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },

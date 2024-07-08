@@ -1,13 +1,14 @@
 import React, { useState, useMemo, RefObject, useCallback } from 'react'
-import { ImageBackground, Text, View, Button, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import TinderCard from 'react-tinder-card'
-import { MessageWithTransaction } from '../../schema/sms'
+import { CategoriesType, MessageWithTransaction } from '../../schema/sms'
 import { SmsItem } from '../sms-item/sms-item'
 import { light } from '../../theme/color'
 import { IconCta } from '../icon-cta/icon-cta'
 import { Bar } from 'react-native-progress'
 import { DoneAnimation } from './done-animation/done-animation'
 import { styles } from './sms-swipe.styles'
+import { Categories } from './categories/categories'
 
 type Direction = 'left' | 'right' | 'up' | 'down'
 
@@ -16,12 +17,29 @@ interface API {
   restoreCard(): Promise<void>
 }
 
+const CATEGORIES: CategoriesType = {
+  bill: { name: 'Bill' },
+  fuel: { name: 'Fuel' },
+  travel: { name: 'Travel' },
+  shopping: { name: 'Shopping' },
+  groceries: { name: 'Groceries' },
+  food: { name: 'Food' },
+  education: { name: 'Education' },
+  healthCare: { name: 'Health Care' },
+  investment: { name: 'Investment' },
+  gift: { name: 'Gift' },
+}
+
 type SmsSwipeProps = { data: MessageWithTransaction[] }
 
 const alreadyRemoved: string[] = []
 
 export const SmsSwipe = ({ data }: SmsSwipeProps) => {
   const [messages, setMessages] = useState(data)
+  const [activeCategory, setActiveCategory] = useState<string>('')
+  const onItemPress = useCallback((category: string) => {
+    setActiveCategory(category)
+  }, [])
 
   const childRefs: RefObject<API>[] = useMemo(
     () =>
@@ -50,6 +68,7 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
       const index = data.map(({ id }) => id).indexOf(toBeRemoved) // Find the index of which to make the reference to
       alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
       childRefs[index].current?.swipe(dir) // Swipe the card!
+      setActiveCategory('')
     }
   }
 
@@ -63,12 +82,24 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.progressContainer}>
+        <Bar
+          width={null}
+          height={12}
+          progress={messages?.length === 0 ? 0 : progress}
+          borderRadius={12}
+          borderWidth={0}
+          unfilledColor={light.colors.primaryColor200}
+          color={light.colors.successSecondaryColor}
+          useNativeDriver
+        />
+      </View>
       <View style={styles.cardContainer}>
         {messages.map((message, index) => (
           <TinderCard
             ref={childRefs[index]}
             key={message.id}
-            preventSwipe={['up', 'down']}
+            preventSwipe={['up', 'down', 'left', 'right']}
             onSwipe={(dir) => swiped(dir, message.id)}
             onCardLeftScreen={() => outOfFrame(message.id)}
           >
@@ -78,6 +109,11 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
           </TinderCard>
         ))}
       </View>
+      <Categories
+        categories={CATEGORIES}
+        activeCategory={activeCategory}
+        onItemPress={onItemPress}
+      />
       <View style={styles.actionCtaContainer}>
         <IconCta
           name={'cross'}
@@ -91,18 +127,7 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
         <IconCta
           name={'check'}
           onPress={() => swipe('right')}
-        />
-      </View>
-      <View style={styles.progressContainer}>
-        <Bar
-          width={null}
-          height={12}
-          progress={messages?.length === 0 ? 0 : progress}
-          borderRadius={12}
-          borderWidth={0}
-          unfilledColor={light.colors.primaryColor200}
-          color={light.colors.successSecondaryColor}
-          useNativeDriver
+          disabled={!activeCategory}
         />
       </View>
     </View>
