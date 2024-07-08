@@ -15,6 +15,7 @@ export const styles = ({ isActive = false }: { isActive?: boolean }) =>
       paddingHorizontal: 16,
     },
     text: {
+      fontFamily: 'Inter',
       fontSize: 12,
       fontWeight: 600,
       color: light.colors.blue500,

@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     color: light.colors.primaryColor300,
+    fontFamily: 'Inter',
     fontSize: 24,
     fontWeight: 600,
     textAlign: 'center',

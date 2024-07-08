@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     paddingBottom: 20,
+    fontFamily: 'Inter',
     fontSize: 12,
     fontWeight: 500,
     lineHeight: 16.8,

@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
+    fontFamily: 'Inter',
     fontSize: 16,
     fontWeight: 600,
     color: light.colors.primaryBgColor,
