@@ -20,9 +20,9 @@
 		9E2022ECAF5B465997546D1D /* Inter-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0066F5C9339F447C8AEA55A2 /* Inter-ExtraLight.ttf */; };
 		71BB4BFA7DAC41EA847ECA1A /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C21BB4A9E7364BE49507D393 /* Inter-Light.ttf */; };
 		06CB3C1B400A42859F17FAF1 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE5EA6AB571F45C089E16879 /* Inter-Medium.ttf */; };
-		9E2FD76C25D2423B85A6F782 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC8F95344E61499EB84FF56A /* Inter-Regular.ttf */; };
 		FF273DE68FD24744AA25B77E /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8447DA256AB421BA218DB51 /* Inter-SemiBold.ttf */; };
 		11FDB004344E4037A3BC45BB /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F516E6FDF84BD4B0C813E7 /* Inter-Thin.ttf */; };
+		8322CDF9DC3143EF8E4BD442 /* Inter.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6B766CE500B4504B92C277D /* Inter.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,9 +60,9 @@
 		0066F5C9339F447C8AEA55A2 /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Inter-ExtraLight.ttf"; path = "../assets/fonts/Inter-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C21BB4A9E7364BE49507D393 /* Inter-Light.ttf */ = {isa = PBXFileReference; name = "Inter-Light.ttf"; path = "../assets/fonts/Inter-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		FE5EA6AB571F45C089E16879 /* Inter-Medium.ttf */ = {isa = PBXFileReference; name = "Inter-Medium.ttf"; path = "../assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DC8F95344E61499EB84FF56A /* Inter-Regular.ttf */ = {isa = PBXFileReference; name = "Inter-Regular.ttf"; path = "../assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		F8447DA256AB421BA218DB51 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; name = "Inter-SemiBold.ttf"; path = "../assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		14F516E6FDF84BD4B0C813E7 /* Inter-Thin.ttf */ = {isa = PBXFileReference; name = "Inter-Thin.ttf"; path = "../assets/fonts/Inter-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C6B766CE500B4504B92C277D /* Inter.ttf */ = {isa = PBXFileReference; name = "Inter.ttf"; path = "../assets/fonts/Inter.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,9 +178,9 @@
 				0066F5C9339F447C8AEA55A2 /* Inter-ExtraLight.ttf */,
 				C21BB4A9E7364BE49507D393 /* Inter-Light.ttf */,
 				FE5EA6AB571F45C089E16879 /* Inter-Medium.ttf */,
-				DC8F95344E61499EB84FF56A /* Inter-Regular.ttf */,
 				F8447DA256AB421BA218DB51 /* Inter-SemiBold.ttf */,
 				14F516E6FDF84BD4B0C813E7 /* Inter-Thin.ttf */,
+				C6B766CE500B4504B92C277D /* Inter.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -287,9 +287,9 @@
 				9E2022ECAF5B465997546D1D /* Inter-ExtraLight.ttf in Resources */,
 				71BB4BFA7DAC41EA847ECA1A /* Inter-Light.ttf in Resources */,
 				06CB3C1B400A42859F17FAF1 /* Inter-Medium.ttf in Resources */,
-				9E2FD76C25D2423B85A6F782 /* Inter-Regular.ttf in Resources */,
 				FF273DE68FD24744AA25B77E /* Inter-SemiBold.ttf in Resources */,
 				11FDB004344E4037A3BC45BB /* Inter-Thin.ttf in Resources */,
+				8322CDF9DC3143EF8E4BD442 /* Inter.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
