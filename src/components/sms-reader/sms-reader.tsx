@@ -6,6 +6,8 @@ import { getTransactionAmount, getTransactionType, processMessage } from '../../
 import { PrimaryCta } from '../primary-cta/primary-cta'
 import { styles } from './sms-reader.styles'
 import { SmsContainer } from '../sms-container/sms-container'
+import { seedDatabase } from '../../utils/initial-seed'
+import { addCategory, getAllCategories } from '../../utils/queries'
 
 const requestPermission = async () => {
   const response = await request(PERMISSIONS.ANDROID.READ_SMS)
@@ -27,6 +29,10 @@ export const SmsReader = () => {
   useEffect(() => {
     async function getPermission() {
       const permission = await requestPermission()
+      await seedDatabase()
+      await addCategory('Test')
+      const category = await getAllCategories()
+      console.log('category', category)
       setHasPermission(permission)
     }
     getPermission()
