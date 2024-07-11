@@ -13,10 +13,12 @@ export const getAllTransaction = async () => {
 export const addTransaction = async ({
   amount,
   categoryId,
+  date,
   description,
 }: {
   amount: string | number
   categoryId: string
+  date: number
   description?: string
 }) => {
   await database.write(async () => {
@@ -24,6 +26,7 @@ export const addTransaction = async ({
       transaction.categoryId = categoryId
       transaction.description = description || ''
       transaction.amount = Number(amount)
+      transaction.transDate = new Date(date)
     })
     return newCategory
   })

@@ -13,6 +13,7 @@ export default appSchema({
       columns: [
         { name: 'category_id', type: 'string', isIndexed: true },
         { name: 'amount', type: 'number' },
+        { name: 'trans_date', type: 'number', isIndexed: true },
         { name: 'description', type: 'string', isOptional: true },
       ],
     }),
