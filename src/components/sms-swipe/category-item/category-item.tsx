@@ -1,20 +1,22 @@
 import { View } from 'react-native'
+import React from 'react'
 import { Cta } from '../../primary-cta/cta'
 import { styles } from './category-item.styles'
 import { useCallback } from 'react'
 
 type CategoryItemProps = {
-  category: string
+  categoryId: string
   name: string
   onItemPress: (category: string) => void
   isActive?: boolean
 }
 
-export const CategoryItem = ({ category, name, isActive, onItemPress }: CategoryItemProps) => {
+export const CategoryItem = ({ categoryId, name, isActive, onItemPress }: CategoryItemProps) => {
   const { container, button, text } = styles({ isActive })
   const itemPressHandler = useCallback(() => {
-    onItemPress(category)
-  }, [])
+    onItemPress(categoryId)
+  }, [categoryId, onItemPress])
+
   return (
     <View>
       <Cta

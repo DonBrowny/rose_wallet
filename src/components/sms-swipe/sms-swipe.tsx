@@ -1,7 +1,7 @@
 import React, { useState, useMemo, RefObject, useCallback } from 'react'
 import { View } from 'react-native'
 import TinderCard from 'react-tinder-card'
-import { CategoriesType, MessageWithTransaction } from '../../schema/sms'
+import { MessageWithTransaction } from '../../schema/sms'
 import { SmsItem } from '../sms-item/sms-item'
 import { light } from '../../theme/color'
 import { IconCta } from '../icon-cta/icon-cta'
@@ -9,6 +9,7 @@ import { Bar } from 'react-native-progress'
 import { DoneAnimation } from './done-animation/done-animation'
 import { styles } from './sms-swipe.styles'
 import { Categories } from './categories/categories'
+import type Category from '../../model/category'
 
 type Direction = 'left' | 'right' | 'up' | 'down'
 
@@ -17,36 +18,23 @@ interface API {
   restoreCard(): Promise<void>
 }
 
-const CATEGORIES: CategoriesType = {
-  bill: { name: 'Bill' },
-  fuel: { name: 'Fuel' },
-  travel: { name: 'Travel' },
-  shopping: { name: 'Shopping' },
-  groceries: { name: 'Groceries' },
-  food: { name: 'Food' },
-  education: { name: 'Education' },
-  healthCare: { name: 'Health Care' },
-  investment: { name: 'Investment' },
-  gift: { name: 'Gift' },
-}
-
-type SmsSwipeProps = { data: MessageWithTransaction[] }
+type SmsSwipeProps = { data: MessageWithTransaction[]; category: Category[] }
 
 const alreadyRemoved: string[] = []
 
-export const SmsSwipe = ({ data }: SmsSwipeProps) => {
+export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
   const [messages, setMessages] = useState(data)
-  const [activeCategory, setActiveCategory] = useState<string>('')
+  const [activeCategoryId, setActiveCategoryId] = useState<string>('')
   const onItemPress = useCallback((category: string) => {
-    setActiveCategory(category)
+    setActiveCategoryId(category)
   }, [])
 
   const childRefs: RefObject<API>[] = useMemo(
     () =>
       Array(data.length)
         .fill(0)
-        .map((i) => React.createRef()),
-    []
+        .map(() => React.createRef()),
+    [data.length]
   )
 
   const progress = useMemo(() => {
@@ -68,13 +56,9 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
       const index = data.map(({ id }) => id).indexOf(toBeRemoved) // Find the index of which to make the reference to
       alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
       childRefs[index].current?.swipe(dir) // Swipe the card!
-      setActiveCategory('')
+      setActiveCategoryId('')
     }
   }
-
-  const renderCard = useCallback((message: MessageWithTransaction) => {
-    return <SmsItem transaction={message} />
-  }, [])
 
   if (messages.length === 0) {
     return <DoneAnimation />
@@ -110,8 +94,8 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
         ))}
       </View>
       <Categories
-        categories={CATEGORIES}
-        activeCategory={activeCategory}
+        categories={categoryData}
+        activeCategoryId={activeCategoryId}
         onItemPress={onItemPress}
       />
       <View style={styles.actionCtaContainer}>
@@ -127,7 +111,7 @@ export const SmsSwipe = ({ data }: SmsSwipeProps) => {
         <IconCta
           name={'check'}
           onPress={() => swipe('right')}
-          disabled={!activeCategory}
+          disabled={!activeCategoryId}
         />
       </View>
     </View>

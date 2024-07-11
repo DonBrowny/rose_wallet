@@ -1,22 +1,23 @@
 import { Text, View } from 'react-native'
-import { CategoriesType } from '../../../schema/sms'
+import React from 'react'
 import { CategoryItem } from '../category-item/category-item'
 import { styles } from './categories.styles'
+import type Category from '../../../model/category'
 
-type CategoriesProps = { categories: CategoriesType; activeCategory: string; onItemPress: (category: string) => void }
+type CategoriesProps = { categories: Category[]; activeCategoryId: string; onItemPress: (category: string) => void }
 
-export const Categories = ({ categories, activeCategory, onItemPress }: CategoriesProps) => {
+export const Categories = ({ categories, activeCategoryId, onItemPress }: CategoriesProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Pick a category for the transaction</Text>
       <View style={styles.itemContainer}>
-        {Object.keys(categories).map((category, index) => (
+        {categories.map(({ name, id }) => (
           <CategoryItem
-            key={`category-item-${index}`}
-            name={categories[category].name}
-            category={category}
-            isActive={activeCategory === category}
+            key={`category-item-${id}`}
+            name={name}
+            isActive={activeCategoryId === id}
             onItemPress={onItemPress}
+            categoryId={id}
           />
         ))}
       </View>

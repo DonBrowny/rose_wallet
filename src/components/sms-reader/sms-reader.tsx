@@ -8,6 +8,7 @@ import { styles } from './sms-reader.styles'
 import { SmsContainer } from '../sms-container/sms-container'
 import { seedDatabase } from '../../utils/initial-seed'
 import { addCategory, getAllCategories } from '../../utils/queries'
+import type Category from '../../model/category'
 
 const requestPermission = async () => {
   const response = await request(PERMISSIONS.ANDROID.READ_SMS)
@@ -18,21 +19,20 @@ const requestPermission = async () => {
 const now = Date.now()
 
 // Calculate timestamp for 30 days ago
-const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000
+const thirtyDaysAgo = now - 120 * 24 * 60 * 60 * 1000
 const fromDate = thirtyDaysAgo
 
 export const SmsReader = () => {
   const [hasPermission, setHasPermission] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [transactions, setTransactions] = useState<MessageWithTransaction[] | null>(null)
+  const [category, setCategory] = useState<Category[]>([])
 
   useEffect(() => {
     async function getPermission() {
       const permission = await requestPermission()
       await seedDatabase()
       await addCategory('Test')
-      const category = await getAllCategories()
-      console.log('category', category)
       setHasPermission(permission)
     }
     getPermission()
@@ -41,7 +41,7 @@ export const SmsReader = () => {
   const buttonPressHandler = useCallback(() => {
     if (hasPermission) {
       setIsLoading(true)
-      NativeModules.SMSModule.getAllMessages(String(fromDate), (messages: Message[]) => {
+      NativeModules.SMSModule.getAllMessages(String(fromDate), async (messages: Message[]) => {
         const messageWithTransaction = messages.flatMap((message: Message) => {
           const { body } = message
           const processedMessage = processMessage(body)
@@ -55,7 +55,9 @@ export const SmsReader = () => {
           }
           return []
         })
+        const categoryResult = await getAllCategories()
         setTransactions(messageWithTransaction || [])
+        setCategory(categoryResult)
         setIsLoading(false)
       })
     } else {
@@ -65,7 +67,10 @@ export const SmsReader = () => {
 
   return (
     <View style={styles.container}>
-      <SmsContainer data={transactions} />
+      <SmsContainer
+        data={transactions}
+        category={category}
+      />
       <PrimaryCta
         text='Retrieve SMS'
         onPress={buttonPressHandler}

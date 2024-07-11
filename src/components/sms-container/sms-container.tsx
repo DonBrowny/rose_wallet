@@ -3,10 +3,11 @@ import React from 'react'
 import type { MessageWithTransaction } from '../../schema/sms'
 import { SmsSwipe } from '../sms-swipe/sms-swipe'
 import { styles } from './sms-container.styles'
+import Category from '../../model/category'
 
-type SmsContainerProps = { data: MessageWithTransaction[] | null }
+type SmsContainerProps = { data: MessageWithTransaction[] | null; category: Category[] }
 
-export const SmsContainer = ({ data }: SmsContainerProps) => {
+export const SmsContainer = ({ data, category }: SmsContainerProps) => {
   if (!data) {
     return (
       <View style={styles.container}>
@@ -23,5 +24,10 @@ export const SmsContainer = ({ data }: SmsContainerProps) => {
     )
   }
 
-  return <SmsSwipe data={data} />
+  return (
+    <SmsSwipe
+      data={data}
+      category={category}
+    />
+  )
 }

@@ -10,5 +10,3 @@ export interface Transaction {
 }
 
 export interface MessageWithTransaction extends Message, Transaction {}
-
-export type CategoriesType = Record<string, Record<'name', string>>
