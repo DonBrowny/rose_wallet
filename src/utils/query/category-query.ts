@@ -1,6 +1,6 @@
-import Category from '../model/category'
-import { TableName } from '../schema/tables'
-import { database } from './db'
+import Category from '../../model/category'
+import { TableName } from '../../schema/tables'
+import { database } from '../db'
 
 const categoryCollection = database.collections.get<Category>(TableName.CATEGORY)
 

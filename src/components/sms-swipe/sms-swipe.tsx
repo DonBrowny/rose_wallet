@@ -10,6 +10,7 @@ import { DoneAnimation } from './done-animation/done-animation'
 import { styles } from './sms-swipe.styles'
 import { Categories } from './categories/categories'
 import type Category from '../../model/category'
+import { addTransaction } from '../../utils/query/transaction-query'
 
 type Direction = 'left' | 'right' | 'up' | 'down'
 
@@ -52,10 +53,12 @@ export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
   const swipe = (dir: Direction) => {
     const cardsLeft = messages.filter(({ id }) => !alreadyRemoved.includes(id))
     if (cardsLeft.length) {
-      const toBeRemoved = cardsLeft[cardsLeft.length - 1].id // Find the card object to be removed
+      const activeCard = cardsLeft[cardsLeft.length - 1]
+      const toBeRemoved = activeCard.id // Find the card object to be removed
       const index = data.map(({ id }) => id).indexOf(toBeRemoved) // Find the index of which to make the reference to
       alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
       childRefs[index].current?.swipe(dir) // Swipe the card!
+      addTransaction({ amount: activeCard.amount, categoryId: activeCategoryId })
       setActiveCategoryId('')
     }
   }

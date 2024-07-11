@@ -10,7 +10,9 @@ export default class Transactions extends Model {
     category: { type: 'belongs_to', key: 'category_id' },
   }
 
-  @field('amount') amount!: string
+  @field('amount') amount!: number
   @text('description') description!: string
+  @text('category_id') categoryId!: string
+
   @relation(TableName.CATEGORY, 'category_id') category!: Relation<Category>
 }

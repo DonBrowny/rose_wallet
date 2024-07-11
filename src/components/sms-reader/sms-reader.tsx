@@ -7,8 +7,8 @@ import { PrimaryCta } from '../primary-cta/primary-cta'
 import { styles } from './sms-reader.styles'
 import { SmsContainer } from '../sms-container/sms-container'
 import { seedDatabase } from '../../utils/initial-seed'
-import { addCategory, getAllCategories } from '../../utils/queries'
 import type Category from '../../model/category'
+import { getAllCategories } from '../../utils/query/category-query'
 
 const requestPermission = async () => {
   const response = await request(PERMISSIONS.ANDROID.READ_SMS)
@@ -32,7 +32,6 @@ export const SmsReader = () => {
     async function getPermission() {
       const permission = await requestPermission()
       await seedDatabase()
-      await addCategory('Test')
       setHasPermission(permission)
     }
     getPermission()

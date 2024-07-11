@@ -2,7 +2,7 @@ import { SyncDatabaseChangeSet, synchronize } from '@nozbe/watermelondb/sync'
 import { database } from './db'
 import { TableName } from '../schema/tables'
 import { dbSeedValue } from '../schema/db-seed'
-import { getAllCategories } from './queries'
+import { getAllCategories } from './query/category-query'
 
 export const seedDatabase = async () => {
   const categories = await getAllCategories()
