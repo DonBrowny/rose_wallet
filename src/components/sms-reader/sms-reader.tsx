@@ -19,7 +19,7 @@ const requestPermission = async () => {
 const now = Date.now()
 
 // Calculate timestamp for 30 days ago
-const thirtyDaysAgo = now - 120 * 24 * 60 * 60 * 1000
+const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000
 const fromDate = thirtyDaysAgo
 
 export const SmsReader = () => {
