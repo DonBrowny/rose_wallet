@@ -5,13 +5,14 @@ import { Text } from '../text/text'
 import type { TextStyleName } from '../text/text.styles'
 
 interface CtaProps extends PressableProps {
-  text: string
+  text?: string
   style?: ViewStyle
   styleName?: TextStyleName
   ctaStyle?: ViewStyle
+  children?: React.ReactNode
 }
 
-export const Cta = ({ text, onPress, style, styleName = 'X_MEDIUM_MEDIUM', ctaStyle }: CtaProps) => {
+export const Cta = ({ text, onPress, style, styleName = 'X_MEDIUM_MEDIUM', ctaStyle, children }: CtaProps) => {
   const scaleValue = useRef(new Animated.Value(1)).current
 
   function onPressIn() {
@@ -38,7 +39,8 @@ export const Cta = ({ text, onPress, style, styleName = 'X_MEDIUM_MEDIUM', ctaSt
         onPress={onPress}
         style={[styles.cta, ctaStyle]}
       >
-        <Text styleName={styleName}>{text}</Text>
+        {text ? <Text styleName={styleName}>{text}</Text> : null}
+        {children}
       </Pressable>
     </Animated.View>
   )

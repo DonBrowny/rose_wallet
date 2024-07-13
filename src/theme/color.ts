@@ -24,6 +24,9 @@ export const lightTheme: Record<AppColorStrings, string> = {
   PROGRESS_BAR_FILLED: colors.darkGreen100,
   PILL_DEFAULT: colors.green500,
   PILL_PRESSED: colors.green900,
+  TAB_BG: colors.green500,
+  PRIMARY_TAB_CTA_COLOR: colors.green900,
+  SECONDARY_TAB_CTA_COLOR: colors.green500,
 }
 
 export const darkTheme = {}
