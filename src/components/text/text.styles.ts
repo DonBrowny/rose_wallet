@@ -8,7 +8,6 @@ const xLarge: TextStyle = {
 
 const large: TextStyle = {
   fontSize: 20,
-  lineHeight: 22,
 }
 
 const xMedium: TextStyle = {

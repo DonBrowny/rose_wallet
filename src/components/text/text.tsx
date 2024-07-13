@@ -10,7 +10,7 @@ interface TextProps extends RnTextProps {
   textAlign?: 'left' | 'center' | 'right'
 }
 
-export const Text = ({ styleName, color = 'PRIMARY_TEXT_COLOR', textAlign = 'center', ...props }: TextProps) => {
+export const Text = ({ styleName, color = 'PRIMARY_TEXT_COLOR', textAlign, ...props }: TextProps) => {
   const style = useMemo(() => {
     return { ...styles[styleName], color: lightTheme[color], textAlign }
   }, [color, styleName, textAlign])

@@ -3,11 +3,12 @@ import { StyleSheet } from 'react-native'
 export const styles = StyleSheet.create({
   item: {
     padding: 20,
+    overflow: 'hidden',
   },
   headerContainer: {
     width: '100%',
     flexDirection: 'row',
-    marginBottom: 24,
+    marginBottom: 20,
     justifyContent: 'space-between',
   },
   addressContainer: {

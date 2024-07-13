@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     borderWidth: 1,
-    borderBlockColor: lightTheme.CARD_BG,
+    borderColor: lightTheme.CARD_BG,
     marginTop: 24,
     padding: 20,
     gap: 20,

@@ -46,12 +46,7 @@ export const SmsItem = ({ transaction }: SmsItemProps) => {
       >
         Transaction Message
       </Text>
-      <Text
-        styleName='X_MEDIUM_NORMAL'
-        textAlign='left'
-      >
-        {transaction.body}
-      </Text>
+      <Text styleName='MEDIUM_NORMAL'>{transaction.body}</Text>
     </View>
   )
 }
