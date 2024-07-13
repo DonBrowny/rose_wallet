@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import TinderCard from 'react-tinder-card'
 import { MessageWithTransaction } from '../../schema/sms'
 import { SmsItem } from '../sms-item/sms-item'
-import { light } from '../../theme/color'
+import { lightTheme } from '../../theme/color'
 import { IconCta } from '../icon-cta/icon-cta'
 import { Bar } from 'react-native-progress'
 import { DoneAnimation } from './done-animation/done-animation'
@@ -76,8 +76,8 @@ export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
           progress={messages?.length === 0 ? 0 : progress}
           borderRadius={12}
           borderWidth={0}
-          unfilledColor={light.colors.primaryColor200}
-          color={light.colors.successSecondaryColor}
+          unfilledColor={lightTheme.PROGRESS_BAR_UNFILLED}
+          color={lightTheme.PROGRESS_BAR_FILLED}
           useNativeDriver
         />
       </View>

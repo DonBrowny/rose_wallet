@@ -34,7 +34,7 @@ export const PrimaryCta = ({ text, onPress }: PrimaryCtaProps) => {
           onPress={onPress}
           style={styles.cta}
         >
-          <Text style={styles.text}>{text}</Text>
+          <Text>{text}</Text>
         </Pressable>
       </Animated.View>
     </View>

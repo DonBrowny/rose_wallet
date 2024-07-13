@@ -1,0 +1,15 @@
+export enum AppColor {
+  PRIMARY_BG,
+  SECONDARY_BG,
+  PRIMARY_TEXT_COLOR,
+  SECONDARY_TEXT_COLOR,
+  PRIMARY_CTA_COLOR,
+  CARD_BG,
+  AMT_TEXT_COLOR,
+  PROGRESS_BAR_UNFILLED,
+  PROGRESS_BAR_FILLED,
+  PILL_DEFAULT,
+  PILL_PRESSED,
+}
+
+export type AppColorStrings = keyof typeof AppColor

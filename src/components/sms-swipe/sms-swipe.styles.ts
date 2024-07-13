@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { light } from '../../theme/color'
+import { lightTheme } from '../../theme/color'
 
 const CARD_HEIGHT = 250
 
@@ -20,9 +20,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     height: CARD_HEIGHT,
     borderRadius: 24,
-    borderWidth: 1,
-    borderBlockColor: light.colors.primaryColor,
-    backgroundColor: '#FFF',
+    backgroundColor: lightTheme.CARD_BG,
   },
   actionCtaContainer: {
     width: '100%',

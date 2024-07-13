@@ -3,12 +3,12 @@ import { NativeModules, View } from 'react-native'
 import { request, PERMISSIONS } from 'react-native-permissions'
 import type { Message, MessageWithTransaction } from '../../schema/sms'
 import { getTransactionAmount, getTransactionType, processMessage } from '../../utils/sms-parser'
-import { PrimaryCta } from '../primary-cta/primary-cta'
 import { styles } from './sms-reader.styles'
 import { SmsContainer } from '../sms-container/sms-container'
 import { seedDatabase } from '../../utils/initial-seed'
 import type Category from '../../model/category'
 import { getAllCategories } from '../../utils/query/category-query'
+import { Cta } from '../primary-cta/cta'
 
 const requestPermission = async () => {
   const response = await request(PERMISSIONS.ANDROID.READ_SMS)
@@ -19,7 +19,7 @@ const requestPermission = async () => {
 const now = Date.now()
 
 // Calculate timestamp for 30 days ago
-const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000
+const thirtyDaysAgo = now - 130 * 24 * 60 * 60 * 1000
 const fromDate = thirtyDaysAgo
 
 export const SmsReader = () => {
@@ -70,7 +70,7 @@ export const SmsReader = () => {
         data={transactions}
         category={category}
       />
-      <PrimaryCta
+      <Cta
         text='Retrieve SMS'
         onPress={buttonPressHandler}
       />

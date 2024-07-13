@@ -1,4 +1,4 @@
-import { Animated, Pressable, PressableProps, Text, View } from 'react-native'
+import { Animated, Pressable, PressableProps, View } from 'react-native'
 import React, { useRef } from 'react'
 import { Icon, IconProps } from '../icon/icon'
 import { ICON_SIZE, styles } from './icon-cta.styles'

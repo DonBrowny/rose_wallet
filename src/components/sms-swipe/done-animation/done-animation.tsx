@@ -1,11 +1,12 @@
 import React from 'react'
 import LottieView from 'lottie-react-native'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+import { Text } from '../../text/text'
 
 export const DoneAnimation = () => {
   return (
     <View style={styles.container}>
-      <Text>All Caught up!!</Text>
+      <Text styleName={'X_LARGE_BOLD'}>All Caught up!!</Text>
       <LottieView
         source={require('../../../../assets/confetti.json')}
         autoPlay={true}

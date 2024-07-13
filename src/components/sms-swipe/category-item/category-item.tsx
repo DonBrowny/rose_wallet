@@ -12,7 +12,7 @@ type CategoryItemProps = {
 }
 
 export const CategoryItem = ({ categoryId, name, isActive, onItemPress }: CategoryItemProps) => {
-  const { container, button, text } = styles({ isActive })
+  const { container, button } = styles({ isActive })
   const itemPressHandler = useCallback(() => {
     onItemPress(categoryId)
   }, [categoryId, onItemPress])
@@ -22,7 +22,6 @@ export const CategoryItem = ({ categoryId, name, isActive, onItemPress }: Catego
       <Cta
         style={container}
         ctaStyle={button}
-        textStyle={text}
         text={name}
         onPress={itemPressHandler}
       />
