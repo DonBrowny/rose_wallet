@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
   LARGE_SEMI_BOLD: {
     ...large,
     fontWeight: 'semibold',
-    fontFamily,
+    fontFamily: `${fontFamily}-SemiBold`,
   },
   LARGE_NORMAL: {
     ...large,

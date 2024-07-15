@@ -10,6 +10,7 @@ const colors = {
   blue100: '#6DB6FE',
   blue500: '#3299FF',
   blue900: '#0068FF',
+  neutral: '#FFFFFF',
 }
 
 export const lightTheme: Record<AppColorStrings, string> = {
@@ -22,11 +23,14 @@ export const lightTheme: Record<AppColorStrings, string> = {
   AMT_TEXT_COLOR: colors.blue900,
   PROGRESS_BAR_UNFILLED: colors.blue100,
   PROGRESS_BAR_FILLED: colors.darkGreen100,
+  BUDGET_BAR_UNFILLED: colors.neutral,
   PILL_DEFAULT: colors.green500,
   PILL_PRESSED: colors.green900,
   TAB_BG: colors.green500,
   PRIMARY_TAB_CTA_COLOR: colors.green900,
   SECONDARY_TAB_CTA_COLOR: colors.green500,
+  BUDGET_TEXT_COLOR: colors.neutral,
+  NEUTRAL_BORDER: colors.neutral,
 }
 
 export const darkTheme = {}

@@ -1,9 +1,11 @@
 import React, { useCallback } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { HomeScreen } from './src/components/screens/home/home'
-import { CategoryScreen } from './src/components/screens/category-screen/category-screen'
+import { AddExpenseScreen } from './src/components/screens/add-expense/add-expense-screen'
 import { type BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { TabBar } from './src/components/tab-bar/tab-bar'
+import { StatusBar } from 'react-native'
+import { lightTheme } from './src/theme/color'
 
 const Tab = createBottomTabNavigator()
 
@@ -11,17 +13,22 @@ function App(): React.JSX.Element {
   const renderTab = useCallback((props: BottomTabBarProps) => <TabBar {...props} />, [])
   return (
     <NavigationContainer>
+      <StatusBar
+        animated={true}
+        backgroundColor={lightTheme.SECONDARY_BG}
+      />
       <Tab.Navigator
         initialRouteName='Home'
         tabBar={renderTab}
+        screenOptions={{ headerShown: false }}
       >
         <Tab.Screen
           name='Home'
           component={HomeScreen}
         />
         <Tab.Screen
-          name='Category'
-          component={CategoryScreen}
+          name='AddExpense'
+          component={AddExpenseScreen}
         />
       </Tab.Navigator>
     </NavigationContainer>
