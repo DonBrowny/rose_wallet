@@ -2,14 +2,15 @@ import { TableName } from './tables'
 
 export const dbSeedValue = {
   [TableName.CATEGORY]: [
-    { id: '1', name: 'Bill' },
-    { id: '2', name: 'Fuel' },
-    { id: '3', name: 'Travel' },
-    { id: '4', name: 'Shopping' },
-    { id: '5', name: 'Groceries' },
-    { id: '6', name: 'Food' },
-    { id: '7', name: 'Education' },
-    { id: '8', name: 'Health Care' },
-    { id: '9', name: 'Investment' },
+    { id: '1', name: 'Bill', icon: 'bill' },
+    { id: '2', name: 'Education', icon: 'education' },
+    { id: '3', name: 'Entertainment', icon: 'entertainment' },
+    { id: '4', name: 'Food', icon: 'food' },
+    { id: '5', name: 'Fuel', icon: 'fuel' },
+    { id: '6', name: 'Groceries', icon: 'groceries' },
+    { id: '7', name: 'Health Care', icon: 'healthcare' },
+    { id: '8', name: 'Investment', icon: 'investment' },
+    { id: '9', name: 'Shopping', icon: 'shopping' },
+    { id: '10', name: 'Transport', icon: 'transport' },
   ],
 }

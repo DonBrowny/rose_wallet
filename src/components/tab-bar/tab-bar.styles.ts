@@ -3,7 +3,7 @@ import { lightTheme } from '../../theme/color'
 
 export const styles = StyleSheet.create({
   container: {
-    height: 108,
+    height: 78,
     backgroundColor: lightTheme.PRIMARY_BG,
   },
   innerContainer: {

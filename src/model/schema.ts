@@ -6,7 +6,10 @@ export default appSchema({
   tables: [
     tableSchema({
       name: TableName.CATEGORY,
-      columns: [{ name: 'name', type: 'string' }],
+      columns: [
+        { name: 'name', type: 'string' },
+        { name: 'icon', type: 'string' },
+      ],
     }),
     tableSchema({
       name: TableName.TRANSACTION,
