@@ -1,8 +1,8 @@
 import { StyleProp, ViewStyle } from 'react-native'
 import React from 'react'
 import { IconMap } from './icon-map'
+import { IconMapKeyType } from '../../schema/icons'
 
-type IconMapKeyType = keyof typeof IconMap
 export type IconProps = { name: IconMapKeyType; size?: number | string; fill?: string; style?: StyleProp<ViewStyle> }
 
 export const Icon = ({ name, size = 24, fill = 'none', style }: IconProps) => {
