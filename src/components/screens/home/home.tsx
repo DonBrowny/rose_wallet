@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { styles } from './home.styles'
 import { Text } from '../../text/text'
 import BudgetContainer from '../../budget-container/budget-container'
+import { seedDatabase } from '../../../utils/initial-seed'
+import { getTopNTransactionsWithCategory } from '../../../utils/query/transaction-query'
+import type { TransactionWithCategory } from '../../../schema/sms'
+import { TransactionTable } from '../../../transaction-table/transaction-table'
 
 export const HomeScreen = () => {
+  const [transactions, setTransactions] = useState<TransactionWithCategory[]>([])
+
+  useEffect(() => {
+    ;(async () => {
+      await seedDatabase()
+      const transactionsData = await getTopNTransactionsWithCategory(5)
+      setTransactions(transactionsData)
+    })()
+  }, [])
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -19,8 +33,9 @@ export const HomeScreen = () => {
           styleName='LARGE_SEMI_BOLD'
           textAlign='center'
         >
-          Category Screen
+          Recent Transactions
         </Text>
+        <TransactionTable transactions={transactions} />
       </View>
     </View>
   )

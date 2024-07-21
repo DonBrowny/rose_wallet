@@ -16,6 +16,7 @@ export enum AppColor {
   PILL_DEFAULT,
   PILL_PRESSED,
   TAB_BG,
+  PRIMARY_CAT_COLOR,
 }
 
 export type AppColorStrings = keyof typeof AppColor

@@ -14,6 +14,7 @@ export interface Transaction {
 export interface TransactionWithCategory
   extends Pick<Transactions, 'amount' | 'description' | 'categoryId' | 'id' | 'transDate'> {
   icon: IconMapKeyType
+  categoryName: string
 }
 
 export interface MessageWithTransaction extends Message, Transaction {}

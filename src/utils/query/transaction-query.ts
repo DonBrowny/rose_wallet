@@ -18,8 +18,8 @@ export const getTopNTransactionsWithCategory = async (records: number) => {
   return Promise.all(
     transactions.map(async (transaction) => {
       const { category, categoryId, id, amount, transDate, description } = transaction
-      const { icon } = await category.fetch()
-      return { categoryId, id, amount, transDate, description, icon }
+      const { icon, name } = await category.fetch()
+      return { categoryId, id, amount, transDate, description, icon, categoryName: name }
     })
   )
 }

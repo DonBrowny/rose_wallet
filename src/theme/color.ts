@@ -31,6 +31,7 @@ export const lightTheme: Record<AppColorStrings, string> = {
   SECONDARY_TAB_CTA_COLOR: colors.green500,
   BUDGET_TEXT_COLOR: colors.neutral,
   NEUTRAL_BORDER: colors.neutral,
+  PRIMARY_CAT_COLOR: colors.blue900,
 }
 
 export const darkTheme = {}
