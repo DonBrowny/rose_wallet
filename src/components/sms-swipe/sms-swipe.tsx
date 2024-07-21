@@ -58,7 +58,9 @@ export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
       const index = data.map(({ id }) => id).indexOf(toBeRemoved) // Find the index of which to make the reference to
       alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
       childRefs[index].current?.swipe(dir) // Swipe the card!
-      addTransaction({ amount: activeCard.amount, categoryId: activeCategoryId, date: Number(activeCard.date) })
+      if (dir === 'right') {
+        addTransaction({ amount: activeCard.amount, categoryId: activeCategoryId, date: Number(activeCard.date) })
+      }
       setActiveCategoryId('')
     }
   }
