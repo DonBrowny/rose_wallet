@@ -17,8 +17,8 @@ const requestPermission = async () => {
 // Current timestamp
 const now = Date.now()
 
-// Calculate timestamp for 30 days ago
-const thirtyDaysAgo = now - 150 * 24 * 60 * 60 * 1000
+// Calculate timestamp for 5 days ago
+const thirtyDaysAgo = now - 5 * 24 * 60 * 60 * 1000
 const fromDate = thirtyDaysAgo
 
 export const SmsReader = () => {
@@ -67,6 +67,7 @@ export const SmsReader = () => {
       <SmsContainer
         data={transactions}
         category={category}
+        loading={isLoading}
       />
       {!transactions ? (
         <Cta
