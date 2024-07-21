@@ -32,12 +32,14 @@ export const HomeScreen = () => {
         />
       </View>
       <View style={styles.innerContainer}>
-        <Text
-          styleName='LARGE_SEMI_BOLD'
-          textAlign='center'
-        >
-          Recent Transactions
-        </Text>
+        <View style={styles.header}>
+          <Text
+            styleName='LARGE_SEMI_BOLD'
+            textAlign='center'
+          >
+            Recent Transactions
+          </Text>
+        </View>
         <TransactionTable transactions={transactions} />
       </View>
     </View>
