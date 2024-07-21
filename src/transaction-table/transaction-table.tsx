@@ -1,4 +1,4 @@
-import { FlatList, View } from 'react-native'
+import { FlatList } from 'react-native'
 import React, { useCallback } from 'react'
 import type { TransactionWithCategory } from '../schema/sms'
 import { TransactionRow } from '../components/transaction-row/transaction-row'
@@ -9,13 +9,11 @@ export const TransactionTable = ({ transactions }: { transactions: TransactionWi
     return <TransactionRow {...item} />
   }, [])
   return (
-    <View>
-      <FlatList
-        contentContainerStyle={styles.container}
-        data={transactions}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
-    </View>
+    <FlatList
+      contentContainerStyle={styles.container}
+      data={transactions}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.id}
+    />
   )
 }

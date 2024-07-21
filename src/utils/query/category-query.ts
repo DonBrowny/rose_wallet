@@ -9,11 +9,13 @@ export const getAllCategories = async () => {
   return categories
 }
 
-export const addCategory = async (name: string) => {
-  await database.write(async () => {
-    const newCategory = await categoryCollection.create((category) => {
-      category.name = name
-    })
-    return newCategory
-  })
-}
+// const addCategory = async (name: string) => {
+//   await database.write(async () => {
+//     const newCategory = await categoryCollection.create((category) => {
+//       category.name = name
+//     })
+//     return newCategory
+//   })
+// }
+
+export const getAllCategoriesQuery = { queryKey: [TableName.CATEGORY], queryFn: getAllCategories }

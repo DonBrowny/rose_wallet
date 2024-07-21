@@ -5,9 +5,9 @@ import type { Message, MessageWithTransaction } from '../../schema/sms'
 import { getTransactionAmount, getTransactionType, processMessage } from '../../utils/sms-parser'
 import { styles } from './sms-reader.styles'
 import { SmsContainer } from '../sms-container/sms-container'
-import type Category from '../../model/category'
-import { getAllCategories } from '../../utils/query/category-query'
+import { getAllCategoriesQuery } from '../../utils/query/category-query'
 import { Cta } from '../primary-cta/cta'
+import { useQuery } from '@tanstack/react-query'
 
 const requestPermission = async () => {
   const response = await request(PERMISSIONS.ANDROID.READ_SMS)
@@ -25,7 +25,8 @@ export const SmsReader = () => {
   const [hasPermission, setHasPermission] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [transactions, setTransactions] = useState<MessageWithTransaction[] | null>(null)
-  const [category, setCategory] = useState<Category[]>([])
+  // const [category, setCategory] = useState<Category[]>([])
+  const { data: category } = useQuery(getAllCategoriesQuery)
 
   useEffect(() => {
     async function getPermission() {
@@ -52,9 +53,7 @@ export const SmsReader = () => {
           }
           return []
         })
-        const categoryResult = await getAllCategories()
         setTransactions(messageWithTransaction || [])
-        setCategory(categoryResult)
         setIsLoading(false)
       })
     } else {
@@ -66,7 +65,7 @@ export const SmsReader = () => {
     <View style={styles.container}>
       <SmsContainer
         data={transactions}
-        category={category}
+        category={category || []}
         loading={isLoading}
       />
       {!transactions ? (
