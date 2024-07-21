@@ -5,15 +5,28 @@ import { database } from '../db'
 
 const transactionCollection = database.collections.get<Transactions>(TableName.TRANSACTION)
 
-//TODO: Remove this or add filter
-export const getAllTransaction = async () => {
-  const transactions = await transactionCollection.query().fetch()
-  return transactions
+export const getTotalAmount = <T extends { amount: number }>(items: T[]) => {
+  return items.reduce((acc, { amount }) => acc + amount, 0)
 }
 
 export const getTopNTransactionsWithCategory = async (records: number) => {
   const transactions = await transactionCollection
     .query(Q.experimentalJoinTables([TableName.CATEGORY]), Q.sortBy('trans_date', Q.desc), Q.take(records))
+    .fetch()
+  return Promise.all(
+    transactions.map(async (transaction) => {
+      const { category, categoryId, id, amount, transDate, description } = transaction
+      const { icon, name } = await category.fetch()
+      return { categoryId, id, amount, transDate, description, icon, categoryName: name }
+    })
+  )
+}
+
+export const getTransactionByMonth = async (month: number, year: number) => {
+  const startTimestamp = new Date(year, month - 1, 1).getTime() // Get start day of a month
+  const endTimestamp = new Date(year, month, 0).getTime() // Get end day of a month
+  const transactions = await transactionCollection
+    .query(Q.sortBy('trans_date', Q.desc), Q.where('trans_date', Q.between(startTimestamp, endTimestamp)))
     .fetch()
   return Promise.all(
     transactions.map(async (transaction) => {
