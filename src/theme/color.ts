@@ -19,6 +19,7 @@ export const lightTheme: Record<AppColorStrings, string> = {
   PRIMARY_TEXT_COLOR: colors.darkGreen500,
   SECONDARY_TEXT_COLOR: colors.green500,
   PRIMARY_CTA_COLOR: colors.green900,
+  SECONDARY_CTA_COLOR: colors.green500,
   CARD_BG: colors.green900,
   AMT_TEXT_COLOR: colors.blue900,
   PROGRESS_BAR_UNFILLED: colors.blue100,

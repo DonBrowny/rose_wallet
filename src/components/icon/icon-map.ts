@@ -13,6 +13,7 @@ import Healthcare from '../../../assets/svg/healthcare.svg'
 import Investment from '../../../assets/svg/investment.svg'
 import Shopping from '../../../assets/svg/shopping.svg'
 import Transport from '../../../assets/svg/transport.svg'
+import Edit from '../../../assets/svg/edit.svg'
 
 export const IconMap = {
   reload: Reload,
@@ -30,4 +31,5 @@ export const IconMap = {
   investment: Investment,
   shopping: Shopping,
   transport: Transport,
+  edit: Edit,
 }

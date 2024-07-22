@@ -6,9 +6,9 @@ export type PrimaryCtaStyleProps = { disabled: boolean | null }
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    borderRadius: 100,
+    borderRadius: 30,
     backgroundColor: lightTheme.PRIMARY_CTA_COLOR,
-    height: 62,
+    height: 45,
   },
   cta: {
     width: '100%',
