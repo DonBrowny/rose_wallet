@@ -33,6 +33,8 @@ export const lightTheme: Record<AppColorStrings, string> = {
   BUDGET_TEXT_COLOR: colors.neutral,
   NEUTRAL_BORDER: colors.neutral,
   PRIMARY_CAT_COLOR: colors.blue900,
+  PRIMARY_TEXT_INPUT_BG: colors.green500,
+  PRIMARY_TEXT_INPUT_PLACEHOLDER: colors.green900,
 }
 
 export const darkTheme = {}
