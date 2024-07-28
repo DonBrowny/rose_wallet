@@ -1,9 +1,9 @@
 import { Q } from '@nozbe/watermelondb'
+import { useMutation } from '@tanstack/react-query'
 import Transactions from '../../model/transaction'
 import { TableName } from '../../schema/tables'
 import { database } from '../db'
 import { useReactNavigationQuery } from './react-navigation-query'
-import { useMutation } from '@tanstack/react-query'
 
 const transactionCollection = database.collections.get<Transactions>(TableName.TRANSACTION)
 const EXPENSE_SUM = `${TableName.TRANSACTION}_expense_sum`

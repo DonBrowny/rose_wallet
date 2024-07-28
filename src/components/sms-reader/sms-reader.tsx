@@ -8,6 +8,9 @@ import { SmsContainer } from '../sms-container/sms-container'
 import { getAllCategoriesQuery } from '../../utils/query/category-query'
 import { Cta } from '../primary-cta/cta'
 import { useQuery } from '@tanstack/react-query'
+import { getMMKVLoader } from '../../utils/mmkv-service/mmkv-service'
+import { useMMKVStorage } from 'react-native-mmkv-storage'
+import { MMKV_LAST_PROCESSED_SMS } from '../../schema/mmkv-keys'
 
 const requestPermission = async () => {
   const response = await request(PERMISSIONS.ANDROID.READ_SMS)
@@ -19,14 +22,15 @@ const now = Date.now()
 
 // Calculate timestamp for 5 days ago
 const thirtyDaysAgo = now - 5 * 24 * 60 * 60 * 1000
-const fromDate = thirtyDaysAgo
+const defaultFomDate = thirtyDaysAgo.toString()
+const storage = getMMKVLoader()
 
 export const SmsReader = () => {
   const [hasPermission, setHasPermission] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [transactions, setTransactions] = useState<MessageWithTransaction[] | null>(null)
-  // const [category, setCategory] = useState<Category[]>([])
   const { data: category } = useQuery(getAllCategoriesQuery)
+  const [fromDate] = useMMKVStorage<string>(MMKV_LAST_PROCESSED_SMS, storage, defaultFomDate)
 
   useEffect(() => {
     async function getPermission() {
@@ -39,7 +43,7 @@ export const SmsReader = () => {
   const buttonPressHandler = useCallback(() => {
     if (hasPermission) {
       setIsLoading(true)
-      NativeModules.SMSModule.getAllMessages(String(fromDate), async (messages: Message[]) => {
+      NativeModules.SMSModule.getAllMessages(fromDate, async (messages: Message[]) => {
         const messageWithTransaction = messages.flatMap((message: Message) => {
           const { body } = message
           const processedMessage = processMessage(body)
@@ -59,7 +63,7 @@ export const SmsReader = () => {
     } else {
       console.log('Permission denied', 'You need to give permission to access sms')
     }
-  }, [hasPermission])
+  }, [fromDate, hasPermission])
 
   return (
     <View style={styles.container}>

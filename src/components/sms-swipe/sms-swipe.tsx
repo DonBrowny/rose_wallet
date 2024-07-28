@@ -11,6 +11,9 @@ import { styles } from './sms-swipe.styles'
 import { Categories } from './categories/categories'
 import type Category from '../../model/category'
 import { useAddTransaction } from '../../utils/query/transaction-query'
+import { getMMKVLoader } from '../../utils/mmkv-service/mmkv-service'
+import { useMMKVStorage } from 'react-native-mmkv-storage'
+import { MMKV_LAST_PROCESSED_SMS } from '../../schema/mmkv-keys'
 
 type Direction = 'left' | 'right' | 'up' | 'down'
 
@@ -22,10 +25,13 @@ interface API {
 type SmsSwipeProps = { data: MessageWithTransaction[]; category: Category[] }
 
 const alreadyRemoved: string[] = []
+const storage = getMMKVLoader()
 
 export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
   const [messages, setMessages] = useState(data)
   const [activeCategoryId, setActiveCategoryId] = useState<string>('')
+  const [_, setProcessedTime] = useMMKVStorage<string>(MMKV_LAST_PROCESSED_SMS, storage)
+
   const { mutate } = useAddTransaction()
   const onItemPress = useCallback((category: string) => {
     setActiveCategoryId(category)
@@ -63,6 +69,7 @@ export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
         mutate({ amount: activeCard.amount, categoryId: activeCategoryId, date: Number(activeCard.date) })
       }
       setActiveCategoryId('')
+      setProcessedTime(activeCard.date)
     }
   }
 
