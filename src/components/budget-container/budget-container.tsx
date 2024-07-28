@@ -8,17 +8,23 @@ import { formatMoney } from '../../utils/formatter/format-money'
 import { Cta } from '../primary-cta/cta'
 import { Icon } from '../icon/icon'
 import { TextInput } from '../text-input/text-input'
+import { useMMKVStorage } from 'react-native-mmkv-storage'
+import { getMMKVLoader } from '../../utils/mmkv-service/mmkv-service'
+import { MMKV_BUDGET } from '../../schema/mmkv-keys'
 
 interface BudgetContainerProps {
-  budget: number
   expense: number
 }
 
-const BudgetContainer = ({ budget, expense }: BudgetContainerProps) => {
-  const progress = expense / budget
-  const balance = budget - expense
+const storage = getMMKVLoader()
+
+const BudgetContainer = ({ expense }: BudgetContainerProps) => {
+  const [budget, setBudget] = useMMKVStorage(MMKV_BUDGET, storage, 25000)
   const [modalVisible, setModalVisible] = useState(false)
   const [number, onChangeNumber] = React.useState('')
+
+  const progress = expense / budget
+  const balance = budget - expense
 
   const openModal = useCallback(() => {
     setModalVisible(true)
@@ -27,6 +33,13 @@ const BudgetContainer = ({ budget, expense }: BudgetContainerProps) => {
   const closeModal = useCallback(() => {
     setModalVisible(false)
   }, [])
+
+  const onSaveChange = useCallback(() => {
+    if (Number.isFinite(+number)) {
+      setBudget(Number(number))
+    }
+    setModalVisible(false)
+  }, [number, setBudget])
 
   return (
     <>
@@ -93,7 +106,7 @@ const BudgetContainer = ({ budget, expense }: BudgetContainerProps) => {
               placeholder='Enter Monthly Budget'
               keyboardType='numeric'
             />
-            <Cta onPress={closeModal}>
+            <Cta onPress={onSaveChange}>
               <Text styleName='X_MEDIUM_MEDIUM'>Save</Text>
             </Cta>
             <Cta

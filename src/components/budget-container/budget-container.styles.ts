@@ -4,7 +4,7 @@ import { lightTheme } from '../../theme/color'
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     marginBottom: 8,
   },
   budgetContainer: {

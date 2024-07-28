@@ -3,12 +3,12 @@ import { View } from 'react-native'
 import { styles } from './home.styles'
 import { Text } from '../../text/text'
 import BudgetContainer from '../../budget-container/budget-container'
-import { seedDatabase } from '../../../utils/initial-seed'
 import {
   useGetCurrentMonthExpense,
   useGetTopNTransactionsWithCategoryQuery,
 } from '../../../utils/query/transaction-query'
 import { TransactionTable } from '../../../transaction-table/transaction-table'
+import { initialSetup } from '../../../utils/initial-setup'
 
 const HOME_SCREEN_TRANSACTIONS = 10
 
@@ -18,7 +18,7 @@ export const HomeScreen = () => {
 
   useEffect(() => {
     ;(async () => {
-      await seedDatabase()
+      await initialSetup()
     })()
   }, [])
 
@@ -26,10 +26,7 @@ export const HomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text styleName='LARGE_SEMI_BOLD'>Budget</Text>
-        <BudgetContainer
-          budget={25000}
-          expense={expense}
-        />
+        <BudgetContainer expense={expense} />
       </View>
       <View style={styles.innerContainer}>
         <View style={styles.header}>
