@@ -14,6 +14,7 @@ import Investment from '../../../assets/svg/investment.svg'
 import Shopping from '../../../assets/svg/shopping.svg'
 import Transport from '../../../assets/svg/transport.svg'
 import Edit from '../../../assets/svg/edit.svg'
+import Plus from '../../../assets/svg/plus.svg'
 
 export const IconMap = {
   reload: Reload,
@@ -32,4 +33,5 @@ export const IconMap = {
   shopping: Shopping,
   transport: Transport,
   edit: Edit,
+  plus: Plus,
 }

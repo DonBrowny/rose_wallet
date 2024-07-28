@@ -6,7 +6,6 @@ const storage = getMMKVLoader()
 
 export async function initialSetup() {
   const isSetupDone = await storage.getBoolAsync(MMKV_INITIAL_SETUP_DONE)
-  console.log('isSetupDone', isSetupDone)
   if (!isSetupDone) {
     await seedDatabase()
     await storage.setIntAsync(MMKV_BUDGET, 20000)

@@ -4,7 +4,11 @@ import { Icon } from '../../icon/icon'
 import { Cta } from '../../primary-cta/cta'
 import { styles } from './tab-item.styles'
 
-const TAB_ICON_MAP: Record<string, 'home' | 'category'> = { Home: 'home', AddExpense: 'category' }
+const TAB_ICON_MAP: Record<string, 'home' | 'category' | 'plus'> = {
+  Home: 'home',
+  AddExpense: 'plus',
+  Transactions: 'category',
+}
 
 interface TabItemProps {
   label: string
