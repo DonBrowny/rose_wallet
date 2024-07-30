@@ -7,6 +7,7 @@ import { TabBar } from './src/components/tab-bar/tab-bar'
 import { StatusBar } from 'react-native'
 import { lightTheme } from './src/theme/color'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { History } from './src/components/screens/history/history'
 
 const Tab = createBottomTabNavigator()
 const queryClient = new QueryClient()
@@ -32,6 +33,10 @@ function App(): React.JSX.Element {
           <Tab.Screen
             name='AddExpense'
             component={AddExpenseScreen}
+          />
+          <Tab.Screen
+            name='Transactions'
+            component={History}
           />
         </Tab.Navigator>
       </NavigationContainer>

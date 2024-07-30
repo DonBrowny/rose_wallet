@@ -20,6 +20,7 @@ export enum AppColor {
   PRIMARY_CAT_COLOR,
   PRIMARY_TEXT_INPUT_BG,
   PRIMARY_TEXT_INPUT_PLACEHOLDER,
+  PILL_BAR_BG,
 }
 
 export type AppColorStrings = keyof typeof AppColor

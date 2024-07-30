@@ -24,8 +24,6 @@ const getTopNTransactionsWithCategory = async (records: number) => {
     .query(Q.experimentalJoinTables([TableName.CATEGORY]), Q.sortBy('trans_date', Q.desc), Q.take(records))
     .fetch()
 
-  console.log('----Called Function: getTopNTransactionsWithCategory')
-
   return Promise.all(
     transactions.map(async (transaction) => {
       const { category, categoryId, id, amount, transDate, description } = transaction
@@ -37,14 +35,24 @@ const getTopNTransactionsWithCategory = async (records: number) => {
 
 const getTransactionByMonth = async (month: number, year: number) => {
   const startTimestamp = new Date(year, month - 1, 1).getTime() // Get start day of a month
-  const endTimestamp = new Date(year, month, 0).getTime() // Get end day of a month
+  const endTimestamp = new Date(year, month, 1).getTime() // Get start day of next month
   const transactions = await transactionCollection
     .query(Q.sortBy('trans_date', Q.desc), Q.where('trans_date', Q.between(startTimestamp, endTimestamp)))
     .fetch()
 
-  console.log('----Called Function: getTransactionByMonth')
-
   return transactions
+}
+
+const getTransactionWithCategoryByMonth = async (month: number, year: number) => {
+  const transactions = await getTransactionByMonth(month, year)
+
+  return Promise.all(
+    transactions.map(async (transaction) => {
+      const { category, categoryId, id, amount, transDate, description } = transaction
+      const { icon, name } = await category.fetch()
+      return { categoryId, id, amount, transDate, description, icon, categoryName: name }
+    })
+  )
 }
 
 const addTransaction = async ({ amount, categoryId, date, description }: AddTransaction) => {
@@ -74,6 +82,17 @@ export function useGetCurrentMonthExpense() {
       const now = new Date()
       const transactions = await getTransactionByMonth(now.getMonth() + 1, now.getFullYear())
       return getTotalAmount(transactions)
+    },
+    refetchOnWindowFocus: true,
+  })
+}
+
+export function useGetExpenseByMonth({ month, year }: { month: number; year: number }) {
+  return useReactNavigationQuery({
+    queryKey: [`monthly_expense_${month}_${year}`],
+    queryFn: async () => {
+      const transactions = await getTransactionWithCategoryByMonth(month, year)
+      return transactions
     },
     refetchOnWindowFocus: true,
   })
