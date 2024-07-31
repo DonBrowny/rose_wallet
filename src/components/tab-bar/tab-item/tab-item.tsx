@@ -3,12 +3,7 @@ import { View } from 'react-native'
 import { Icon } from '../../icon/icon'
 import { Cta } from '../../primary-cta/cta'
 import { styles } from './tab-item.styles'
-
-const TAB_ICON_MAP: Record<string, 'home' | 'category' | 'plus'> = {
-  Home: 'home',
-  AddExpense: 'plus',
-  Transactions: 'category',
-}
+import { TAB_ICON_MAP } from '../../../schema/screens'
 
 interface TabItemProps {
   label: string

@@ -7,6 +7,7 @@ import { useGetExpenseByMonth } from '../../utils/query/transaction-query'
 import { MonthPill } from '../month-pill/month-pill'
 import { getAllMonths } from '../../utils/expense-history/gat-all-monts'
 import { getMonthYear } from '../../utils/expense-history/get-month-year'
+import { EmptyView } from '../empty-view/empty-view'
 
 const months = getAllMonths()
 
@@ -71,7 +72,10 @@ export const ExpenseHistory = () => {
           pagingEnabled
         />
       </View>
-      <TransactionTable transactions={data || []} />
+      <TransactionTable
+        transactions={data || []}
+        ListEmptyComponent={<EmptyView text='No Transaction Found for selected month' />}
+      />
     </View>
   )
 }

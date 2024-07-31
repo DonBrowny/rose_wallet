@@ -4,7 +4,12 @@ import type { TransactionWithCategory } from '../schema/sms'
 import { TransactionRow } from '../components/transaction-row/transaction-row'
 import { styles } from './transaction-table.styles'
 
-export const TransactionTable = ({ transactions }: { transactions: TransactionWithCategory[] }) => {
+interface TransactionTableProps {
+  transactions: TransactionWithCategory[]
+  ListEmptyComponent?: React.ReactElement<any, string | React.JSXElementConstructor<any>>
+}
+
+export const TransactionTable = ({ transactions, ListEmptyComponent }: TransactionTableProps) => {
   const renderItem = useCallback(({ item }: { item: TransactionWithCategory }) => {
     return <TransactionRow {...item} />
   }, [])
@@ -14,6 +19,7 @@ export const TransactionTable = ({ transactions }: { transactions: TransactionWi
       data={transactions}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
+      ListEmptyComponent={ListEmptyComponent}
     />
   )
 }
