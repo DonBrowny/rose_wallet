@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import React from 'react'
 import { CategoryItem } from '../category-item/category-item'
 import { styles } from './categories.styles'
@@ -11,7 +11,7 @@ export const Categories = ({ categories, activeCategoryId, onItemPress }: Catego
   return (
     <View style={styles.container}>
       <Text styleName='X_MEDIUM_SEMI_BOLD'>Pick a category for the transaction</Text>
-      <View style={styles.itemContainer}>
+      <ScrollView style={styles.itemContainer}>
         {categories.map(({ name, id }) => (
           <CategoryItem
             key={`category-item-${id}`}
@@ -21,7 +21,7 @@ export const Categories = ({ categories, activeCategoryId, onItemPress }: Catego
             categoryId={id}
           />
         ))}
-      </View>
+      </ScrollView>
     </View>
   )
 }

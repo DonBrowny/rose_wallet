@@ -12,5 +12,8 @@ export const dbSeedValue = {
     { id: '8', name: 'Investment', icon: 'investment' },
     { id: '9', name: 'Shopping', icon: 'shopping' },
     { id: '10', name: 'Transport', icon: 'transport' },
+    { id: '11', name: 'Gift', icon: 'gift' },
+    { id: '12', name: 'Loan', icon: 'loan' },
+    { id: '13', name: 'Donation', icon: 'donate' },
   ],
 }
