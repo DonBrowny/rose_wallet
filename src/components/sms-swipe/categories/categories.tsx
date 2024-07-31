@@ -11,7 +11,7 @@ export const Categories = ({ categories, activeCategoryId, onItemPress }: Catego
   return (
     <View style={styles.container}>
       <Text styleName='X_MEDIUM_SEMI_BOLD'>Pick a category for the transaction</Text>
-      <ScrollView style={styles.itemContainer}>
+      <ScrollView contentContainerStyle={styles.itemContainer}>
         {categories.map(({ name, id }) => (
           <CategoryItem
             key={`category-item-${id}`}
