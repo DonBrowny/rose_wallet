@@ -19,6 +19,7 @@ import Gift from '../../../assets/svg/gift.svg'
 import Loan from '../../../assets/svg/loan.svg'
 import Donate from '../../../assets/svg/donate.svg'
 import Wallet from '../../../assets/svg/wallet.svg'
+import EmptyWallet from '../../../assets/svg/empty-wallet.svg'
 
 export const IconMap = {
   reload: Reload,
@@ -42,4 +43,5 @@ export const IconMap = {
   gift: Gift,
   donate: Donate,
   wallet: Wallet,
+  emptyWallet: EmptyWallet,
 }
