@@ -9,9 +9,9 @@
 - [ ] Feature to add category
 
 ## Beta 1.0
- - [ ] Read SMS and filter expense related messages
- - [ ] Option to accept or cancel a message expense message
- - [ ] Store the accepted message in localDB
- - [ ] Edit monthly Budget
- - [ ] Light Mode Theme
- - [ ] View Transaction history
+ - [x] Read SMS and filter expense related messages
+ - [x] Option to accept or cancel a message expense message
+ - [x] Store the accepted message in localDB
+ - [x] Edit monthly Budget
+ - [x] Light Mode Theme
+ - [x] View Transaction history
