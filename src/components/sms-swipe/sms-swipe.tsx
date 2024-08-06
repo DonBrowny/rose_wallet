@@ -1,5 +1,5 @@
-import React, { useState, useMemo, RefObject, useCallback } from 'react'
-import { View } from 'react-native'
+import React, { useState, useMemo, RefObject, useCallback, useRef } from 'react'
+import { View, TextInput as RNTextInput } from 'react-native'
 import TinderCard from 'react-tinder-card'
 import { MessageWithTransaction } from '../../schema/sms'
 import { SmsItem } from '../sms-item/sms-item'
@@ -14,6 +14,7 @@ import { useAddTransaction } from '../../utils/query/transaction-query'
 import { getMMKVLoader } from '../../utils/mmkv-service/mmkv-service'
 import { useMMKVStorage } from 'react-native-mmkv-storage'
 import { MMKV_LAST_PROCESSED_SMS } from '../../schema/mmkv-keys'
+import { TextInput } from '../text-input/text-input'
 
 type Direction = 'left' | 'right' | 'up' | 'down'
 
@@ -29,6 +30,9 @@ const storage = getMMKVLoader()
 
 export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
   const [messages, setMessages] = useState(data)
+  const [description, onDescriptionChange] = React.useState('')
+  const textRef = useRef<RNTextInput>(null)
+
   const [activeCategoryId, setActiveCategoryId] = useState<string>('')
   const [_, setProcessedTime] = useMMKVStorage<string>(MMKV_LAST_PROCESSED_SMS, storage)
 
@@ -36,6 +40,11 @@ export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
   const onItemPress = useCallback((category: string) => {
     setActiveCategoryId(category)
   }, [])
+  const onTextChange = useCallback((value: string) => {
+    onDescriptionChange(value)
+  }, [])
+
+  console.log(description)
 
   const childRefs: RefObject<API>[] = useMemo(
     () =>
@@ -66,9 +75,11 @@ export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
       alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
       childRefs[index].current?.swipe(dir) // Swipe the card!
       if (dir === 'right') {
-        mutate({ amount: activeCard.amount, categoryId: activeCategoryId, date: Number(activeCard.date) })
+        mutate({ amount: activeCard.amount, categoryId: activeCategoryId, date: Number(activeCard.date), description })
       }
       setActiveCategoryId('')
+      textRef.current?.clear()
+      onDescriptionChange('')
       setProcessedTime(activeCard.date)
     }
   }
@@ -79,18 +90,6 @@ export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.progressContainer}>
-        <Bar
-          width={null}
-          height={12}
-          progress={messages?.length === 0 ? 0 : progress}
-          borderRadius={12}
-          borderWidth={0}
-          unfilledColor={lightTheme.PROGRESS_BAR_UNFILLED}
-          color={lightTheme.PROGRESS_BAR_FILLED}
-          useNativeDriver
-        />
-      </View>
       <View style={styles.cardContainer}>
         {messages.map((message, index) => (
           <TinderCard
@@ -106,6 +105,18 @@ export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
           </TinderCard>
         ))}
       </View>
+      <View style={styles.progressContainer}>
+        <Bar
+          width={null}
+          height={8}
+          progress={messages?.length === 0 ? 0 : progress}
+          borderRadius={4}
+          borderWidth={0}
+          unfilledColor={lightTheme.PROGRESS_BAR_UNFILLED}
+          color={lightTheme.PROGRESS_BAR_FILLED}
+          useNativeDriver
+        />
+      </View>
       <Categories
         categories={categoryData}
         activeCategoryId={activeCategoryId}
@@ -116,11 +127,13 @@ export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
           name={'cross'}
           onPress={() => swipe('left')}
         />
-        {/* <IconCta
-          name={'reload'}
-          onPress={onUndoPress}
-          disabled={processedCount === 0}
-        /> */}
+        <TextInput
+          ref={textRef}
+          placeholder='Description (Optional)'
+          onChangeText={onTextChange}
+          numberOfLines={2}
+          multiline
+        />
         <IconCta
           name={'check'}
           onPress={() => swipe('right')}

@@ -21,6 +21,7 @@ export enum AppColor {
   PRIMARY_TEXT_INPUT_BG,
   PRIMARY_TEXT_INPUT_PLACEHOLDER,
   PILL_BAR_BG,
+  TABLE_BORDER,
 }
 
 export type AppColorStrings = keyof typeof AppColor
