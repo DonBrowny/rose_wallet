@@ -46,7 +46,13 @@ export const SmsItem = ({ transaction }: SmsItemProps) => {
       >
         Transaction Message
       </Text>
-      <Text styleName='MEDIUM_NORMAL'>{transaction.body}</Text>
+      <Text
+        styleName='MEDIUM_NORMAL'
+        numberOfLines={4}
+        ellipsizeMode='tail'
+      >
+        {transaction.body}
+      </Text>
     </View>
   )
 }

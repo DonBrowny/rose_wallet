@@ -20,8 +20,8 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ progress, height }) =>
   }, [progress])
 
   const width = animation.current.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0%', '100%'],
+    inputRange: [0, 0.01, 1],
+    outputRange: ['0%', '0%', '100%'],
     extrapolate: 'clamp',
   })
 
