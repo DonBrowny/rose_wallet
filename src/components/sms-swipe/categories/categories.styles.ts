@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
     borderColor: lightTheme.CARD_BG,
-    marginTop: 24,
     padding: 20,
     gap: 20,
     borderRadius: 50,

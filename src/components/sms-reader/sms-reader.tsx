@@ -21,7 +21,7 @@ const requestPermission = async () => {
 const now = Date.now()
 
 // Calculate timestamp for 5 days ago
-const thirtyDaysAgo = now - 5 * 24 * 60 * 60 * 1000
+const thirtyDaysAgo = now - 150 * 24 * 60 * 60 * 1000
 const defaultFomDate = thirtyDaysAgo.toString()
 const storage = getMMKVLoader()
 
