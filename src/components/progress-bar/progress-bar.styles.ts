@@ -8,6 +8,7 @@ export const styles = (height: number) =>
       width: '100%',
       backgroundColor: lightTheme.BUDGET_BAR_UNFILLED,
       borderRadius: height / 2,
+      overflow: 'hidden',
     },
     progressBar: {
       height: '100%',
