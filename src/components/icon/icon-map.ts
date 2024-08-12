@@ -42,6 +42,7 @@ import Phone from '../../../assets/svg/phone.svg'
 import School from '../../../assets/svg/school.svg'
 import SchoolKit from '../../../assets/svg/school-kit.svg'
 import Drag from '../../../assets/svg/drag.svg'
+import Tax from '../../../assets/svg/tax.svg'
 
 export const IconMap = {
   reload: Reload,
@@ -88,4 +89,5 @@ export const IconMap = {
   school: School,
   schoolKit: SchoolKit,
   drag: Drag,
+  tax: Tax,
 }

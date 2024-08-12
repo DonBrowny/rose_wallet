@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native'
 import { lightTheme } from '../../theme/color'
+import { BOTTOM_TAB_HEIGHT } from '../../schema/constants'
 
 export const styles = StyleSheet.create({
   container: {
-    height: 78,
+    height: BOTTOM_TAB_HEIGHT,
     backgroundColor: lightTheme.PRIMARY_BG,
   },
   innerContainer: {
