@@ -6,7 +6,7 @@ import { Text } from '../text/text'
 import { styles } from './transaction-row.styles'
 import { formatDisplayDate } from '../../utils/formatter/format-display-date'
 
-export const TransactionRow = ({ amount, icon, transDate, categoryName }: TransactionWithCategory) => {
+export const TransactionRow = ({ amount, icon, transDate, categoryName, description }: TransactionWithCategory) => {
   return (
     <View style={styles.container}>
       <IconPill
@@ -22,7 +22,24 @@ export const TransactionRow = ({ amount, icon, transDate, categoryName }: Transa
           {formatDisplayDate(transDate)}
         </Text>
       </View>
-      <Text styleName='X_MEDIUM_MEDIUM'>{amount}</Text>
+      <View style={styles.description}>
+        <Text
+          styleName='SMALL_NORMAL'
+          textAlign='left'
+          numberOfLines={2}
+          ellipsizeMode='tail'
+        >
+          {description}
+        </Text>
+      </View>
+      <View style={styles.amount}>
+        <Text
+          styleName='X_MEDIUM_MEDIUM'
+          textAlign='right'
+        >
+          {amount}
+        </Text>
+      </View>
     </View>
   )
 }

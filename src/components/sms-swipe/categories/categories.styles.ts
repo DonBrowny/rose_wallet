@@ -3,13 +3,13 @@ import { lightTheme } from '../../../theme/color'
 
 export const styles = StyleSheet.create({
   container: {
+    flex: 1,
     borderWidth: 1,
     borderColor: lightTheme.CARD_BG,
-    marginTop: 24,
-    padding: 20,
+    padding: 12,
     gap: 20,
     borderRadius: 50,
-    height: '40%',
+    overflow: 'hidden',
   },
   itemContainer: {
     flexDirection: 'row',

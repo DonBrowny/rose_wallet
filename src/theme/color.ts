@@ -38,6 +38,7 @@ export const lightTheme: Record<AppColorStrings, string> = {
   PRIMARY_TEXT_INPUT_BG: colors.green500,
   PRIMARY_TEXT_INPUT_PLACEHOLDER: colors.green900,
   PILL_BAR_BG: colors.green500,
+  TABLE_BORDER: colors.green900,
 }
 
 export const darkTheme = {}
