@@ -5,7 +5,7 @@ const fontFamily = 'Poppins'
 
 export const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    flex: 1,
     height: 42,
     marginVertical: 16,
     paddingHorizontal: 16,

@@ -10,7 +10,12 @@ type CategoriesProps = { categories: Category[]; activeCategoryId: string; onIte
 export const Categories = ({ categories, activeCategoryId, onItemPress }: CategoriesProps) => {
   return (
     <View style={styles.container}>
-      <Text styleName='X_MEDIUM_SEMI_BOLD'>Pick a category for the transaction</Text>
+      <Text
+        styleName='X_MEDIUM_SEMI_BOLD'
+        textAlign='center'
+      >
+        Pick a category for the transaction
+      </Text>
       <ScrollView contentContainerStyle={styles.itemContainer}>
         {categories.map(({ name, id }) => (
           <CategoryItem

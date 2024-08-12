@@ -1,4 +1,4 @@
-import { Animated, Pressable, PressableProps, View } from 'react-native'
+import { Animated, Pressable, PressableProps } from 'react-native'
 import React, { useRef } from 'react'
 import { Icon, IconProps } from '../icon/icon'
 import { ICON_SIZE, styles } from './icon-cta.styles'
@@ -25,20 +25,18 @@ export const IconCta = ({ onPress, name, disabled = false }: IconCtaProps) => {
   }
 
   return (
-    <View>
-      <Animated.View style={[styles({ disabled }).container, { transform: [{ scale: scaleValue }] }]}>
-        <Pressable
-          onPressIn={onPressIn}
-          onPressOut={onPressOut}
-          onPress={onPress}
-          disabled={disabled}
-        >
-          <Icon
-            name={name}
-            size={ICON_SIZE}
-          />
-        </Pressable>
-      </Animated.View>
-    </View>
+    <Animated.View style={[styles({ disabled }).container, { transform: [{ scale: scaleValue }] }]}>
+      <Pressable
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        onPress={onPress}
+        disabled={disabled}
+      >
+        <Icon
+          name={name}
+          size={ICON_SIZE}
+        />
+      </Pressable>
+    </Animated.View>
   )
 }

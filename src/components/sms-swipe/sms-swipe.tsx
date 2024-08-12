@@ -99,28 +99,30 @@ export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
         ))}
       </View>
 
-      <Categories
-        categories={categoryData}
-        activeCategoryId={activeCategoryId}
-        onItemPress={onItemPress}
-      />
-      <View style={styles.actionCtaContainer}>
-        <IconCta
-          name={'cross'}
-          onPress={swipeLeftHandler}
+      <View style={styles.subItemsContainer}>
+        <Categories
+          categories={categoryData}
+          activeCategoryId={activeCategoryId}
+          onItemPress={onItemPress}
         />
-        <TextInput
-          ref={textRef}
-          placeholder='Description (Optional)'
-          onChangeText={onTextChange}
-          numberOfLines={2}
-          multiline
-        />
-        <IconCta
-          name={'check'}
-          onPress={swipeRightHandler}
-          disabled={!activeCategoryId}
-        />
+        <View style={styles.actionCtaContainer}>
+          <IconCta
+            name={'cross'}
+            onPress={swipeLeftHandler}
+          />
+          <TextInput
+            ref={textRef}
+            placeholder='Description (Optional)'
+            onChangeText={onTextChange}
+            numberOfLines={2}
+            multiline
+          />
+          <IconCta
+            name={'check'}
+            onPress={swipeRightHandler}
+            disabled={!activeCategoryId}
+          />
+        </View>
       </View>
     </View>
   )
