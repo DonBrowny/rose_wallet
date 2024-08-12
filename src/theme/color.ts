@@ -11,6 +11,7 @@ const colors = {
   blue500: '#3299FF',
   blue900: '#0068FF',
   neutral: '#FFFFFF',
+  void: '#031314',
 }
 
 export const lightTheme: Record<AppColorStrings, string> = {
@@ -28,6 +29,7 @@ export const lightTheme: Record<AppColorStrings, string> = {
   PILL_DEFAULT: colors.green500,
   PILL_PRESSED: colors.green900,
   TAB_BG: colors.green500,
+  TAB_ICON_STROKE: colors.darkGreen500,
   PRIMARY_TAB_CTA_COLOR: colors.green900,
   SECONDARY_TAB_CTA_COLOR: colors.green500,
   BUDGET_TEXT_COLOR: colors.neutral,

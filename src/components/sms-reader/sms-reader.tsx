@@ -57,7 +57,7 @@ export const SmsReader = () => {
           }
           return []
         })
-        setTransactions(messageWithTransaction || [])
+        setTransactions(messageWithTransaction.reverse() || [])
         setIsLoading(false)
       })
     } else {

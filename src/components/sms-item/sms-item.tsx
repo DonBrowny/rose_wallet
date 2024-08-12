@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import type { MessageWithTransaction } from '../../schema/sms'
 import { convertTimestampToDisplayTime } from '../../utils/time'
 import { styles } from './sms-item.styles'
@@ -9,7 +9,7 @@ type SmsItemProps = { transaction: MessageWithTransaction }
 
 export const SmsItem = ({ transaction }: SmsItemProps) => {
   return (
-    <View style={styles.item}>
+    <>
       <Text
         styleName='SMALL_NORMAL'
         textAlign='left'
@@ -46,7 +46,9 @@ export const SmsItem = ({ transaction }: SmsItemProps) => {
       >
         Transaction Message
       </Text>
-      <Text styleName='MEDIUM_NORMAL'>{transaction.body}</Text>
-    </View>
+      <ScrollView>
+        <Text styleName='MEDIUM_NORMAL'>{transaction.body}</Text>
+      </ScrollView>
+    </>
   )
 }
