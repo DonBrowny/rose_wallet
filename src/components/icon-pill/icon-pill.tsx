@@ -5,15 +5,21 @@ import { styles } from './icon-pill.styles'
 import { lightTheme } from '../../theme/color'
 
 interface IconPillProps extends Pick<IconProps, 'name'> {
+  variant?: 'large' | 'normal'
   color?: string
 }
 
-export const IconPill = ({ name, color }: IconPillProps) => {
-  const { container } = useMemo(() => styles({ color: color || lightTheme.PRIMARY_CAT_COLOR }), [color])
+export const IconPill = ({ name, color, variant = 'normal' }: IconPillProps) => {
+  const { container } = useMemo(
+    () => styles({ color: color || lightTheme.PRIMARY_CAT_COLOR, variant }),
+    [color, variant]
+  )
+
+  const size = variant === 'large' ? 45 : 28
   return (
     <View style={container}>
       <Icon
-        size={28}
+        size={size}
         name={name}
         fill='#FFF'
       />

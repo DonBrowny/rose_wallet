@@ -9,6 +9,7 @@ import { lightTheme } from './src/theme/color'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { History } from './src/components/screens/history/history'
 import { Screens } from './src/schema/screens'
+import { CategoryScreen } from './src/components/screens/category-screen/category-screen'
 
 const Tab = createBottomTabNavigator()
 const queryClient = new QueryClient()
@@ -38,6 +39,10 @@ function App(): React.JSX.Element {
           <Tab.Screen
             name={Screens.TRANSACTION_HISTORY}
             component={History}
+          />
+          <Tab.Screen
+            name={Screens.CATEGORY}
+            component={CategoryScreen}
           />
         </Tab.Navigator>
       </NavigationContainer>
