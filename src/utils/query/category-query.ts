@@ -1,8 +1,10 @@
+import { Q } from '@nozbe/watermelondb'
 import Category from '../../model/category'
-import type { CategoryData } from '../../schema/category'
+import type { CategoryData, CategoryPositions } from '../../schema/category'
 import { TableName } from '../../schema/tables'
 import { database } from '../db'
 import { useReactNavigationQuery } from './react-navigation-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 const categoryCollection = database.collections.get<Category>(TableName.CATEGORY)
 
@@ -20,19 +22,45 @@ export const getAllCategories = async () => {
 //   })
 // }
 
-export const getAllCategoriesQuery = { queryKey: [TableName.CATEGORY], queryFn: getAllCategories }
+const modifyCategoryOrder = async (newPosition: CategoryPositions) => {
+  const ids = Object.keys(newPosition)
+  console.log('ids', ids)
+  await database.write(async () => {
+    const categories = await categoryCollection.query(Q.where('id', Q.oneOf(ids)))
+
+    await database.batch(
+      categories.map((category) =>
+        category.prepareUpdate(() => {
+          category.order = newPosition[category.id].updatedOrder
+        })
+      )
+    )
+  })
+}
 
 export function useGetAllCategories() {
   return useReactNavigationQuery({
     queryKey: [TableName.CATEGORY],
     queryFn: async () => {
       const categories = await getAllCategories()
-      const categoriesWithOrder = categories.map<CategoryData>((x, index) => {
+      const categoriesWithOrder = categories.map<CategoryData>((x) => {
         const { id, icon, name, order } = x
-        return { id, icon, name, order: order || index }
+        return { id, icon, name, order }
       })
-      return categoriesWithOrder || []
+      return categoriesWithOrder.sort((a, b) => a.order - b.order) || []
     },
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
+  })
+}
+
+export function useModifyCategoryOrder() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (newPosition: CategoryPositions) => {
+      return modifyCategoryOrder(newPosition)
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [TableName.CATEGORY] })
+    },
   })
 }
