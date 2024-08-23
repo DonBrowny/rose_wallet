@@ -24,7 +24,6 @@ export const getAllCategories = async () => {
 
 const modifyCategoryOrder = async (newPosition: CategoryPositions) => {
   const ids = Object.keys(newPosition)
-  console.log('ids', ids)
   await database.write(async () => {
     const categories = await categoryCollection.query(Q.where('id', Q.oneOf(ids)))
 

@@ -154,7 +154,6 @@ export const useGesture = (
           },
         }
       }
-      console.log(currentCategoryPositions.value)
       //stop dragging
       isDragging.value = withDelay(200, withSpring(0))
       runOnJS(saveChanges)(currentCategoryPositions.value)
