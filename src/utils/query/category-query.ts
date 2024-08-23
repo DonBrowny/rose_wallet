@@ -1,4 +1,5 @@
 import Category from '../../model/category'
+import type { CategoryData } from '../../schema/category'
 import { TableName } from '../../schema/tables'
 import { database } from '../db'
 import { useReactNavigationQuery } from './react-navigation-query'
@@ -26,8 +27,9 @@ export function useGetAllCategories() {
     queryKey: [TableName.CATEGORY],
     queryFn: async () => {
       const categories = await getAllCategories()
-      const categoriesWithOrder = categories.map(({ icon, name, order }, index) => {
-        return { icon, name, order: order || index + 1 }
+      const categoriesWithOrder = categories.map<CategoryData>((x, index) => {
+        const { id, icon, name, order } = x
+        return { id, icon, name, order: order || index }
       })
       return categoriesWithOrder || []
     },

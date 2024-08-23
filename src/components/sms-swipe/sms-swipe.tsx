@@ -5,15 +5,15 @@ import { IconCta } from '../icon-cta/icon-cta'
 import { DoneAnimation } from './done-animation/done-animation'
 import { styles } from './sms-swipe.styles'
 import { Categories } from './categories/categories'
-import type Category from '../../model/category'
 import { useAddTransaction } from '../../utils/query/transaction-query'
 import { getMMKVLoader } from '../../utils/mmkv-service/mmkv-service'
 import { useMMKVStorage } from 'react-native-mmkv-storage'
 import { MMKV_LAST_PROCESSED_SMS } from '../../schema/mmkv-keys'
 import { TextInput } from '../text-input/text-input'
 import { SmsAnimatedCard, SmsAnimatedCardRef, SmsAnimationDirection } from './sms-animated-card/sms-animated-card'
+import type { CategoryData } from '../../schema/category'
 
-type SmsSwipeProps = { data: MessageWithTransaction[]; category: Category[] }
+type SmsSwipeProps = { data: MessageWithTransaction[]; category: CategoryData[] }
 
 const storage = getMMKVLoader()
 

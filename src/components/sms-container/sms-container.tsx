@@ -3,11 +3,11 @@ import React from 'react'
 import type { MessageWithTransaction } from '../../schema/sms'
 import { SmsSwipe } from '../sms-swipe/sms-swipe'
 import { styles } from './sms-container.styles'
-import Category from '../../model/category'
 import { Text } from '../text/text'
 import { lightTheme } from '../../theme/color'
+import type { CategoryData } from '../../schema/category'
 
-type SmsContainerProps = { data: MessageWithTransaction[] | null; category: Category[]; loading: boolean }
+type SmsContainerProps = { data: MessageWithTransaction[] | null; category: CategoryData[]; loading: boolean }
 
 export const SmsContainer = ({ data, category, loading }: SmsContainerProps) => {
   if (loading) {
