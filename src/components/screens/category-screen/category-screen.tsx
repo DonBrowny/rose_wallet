@@ -27,10 +27,12 @@ export const CategoryScreen = () => {
             {!isLoading ? (
               <SortCategory data={category} />
             ) : (
-              <ActivityIndicator
-                size='large'
-                color={lightTheme.PRIMARY_CTA_COLOR}
-              />
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator
+                  size='large'
+                  color={lightTheme.PRIMARY_CTA_COLOR}
+                />
+              </View>
             )}
           </View>
           <View style={styles.ctaContainer}>
@@ -56,6 +58,10 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 55,
     alignItems: 'center',
     overflow: 'hidden',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
   },
   scrollContainer: {
     width: '100%',

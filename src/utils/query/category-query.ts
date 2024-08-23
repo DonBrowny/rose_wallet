@@ -48,7 +48,7 @@ export function useGetAllCategories() {
       })
       return categoriesWithOrder || []
     },
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
   })
 }
 

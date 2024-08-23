@@ -20,9 +20,11 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   draggerContainer: {
-    width: '10%',
+    width: 60,
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 12,
   },
   marginBottom: {
     marginBottom: 8,
