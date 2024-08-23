@@ -9,7 +9,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 const categoryCollection = database.collections.get<Category>(TableName.CATEGORY)
 
 export const getAllCategories = async () => {
-  const categories = await categoryCollection.query().fetch()
+  const categories = await categoryCollection.query(Q.sortBy('order', Q.asc)).fetch()
   return categories
 }
 
@@ -46,7 +46,7 @@ export function useGetAllCategories() {
         const { id, icon, name, order } = x
         return { id, icon, name, order }
       })
-      return categoriesWithOrder.sort((a, b) => a.order - b.order) || []
+      return categoriesWithOrder || []
     },
     refetchOnWindowFocus: true,
   })
