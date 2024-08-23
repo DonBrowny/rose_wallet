@@ -1,6 +1,7 @@
 import {
   SharedValue,
   interpolate,
+  runOnJS,
   useAnimatedReaction,
   useAnimatedStyle,
   useDerivedValue,
@@ -12,6 +13,7 @@ import {
 import { Gesture } from 'react-native-gesture-handler'
 import type { CategoryData, CategoryPositions, NullableNumber } from '../../../schema/category'
 import { SORT_CATEGORY_ITEM_HEIGHT } from '../../../schema/constants'
+import { useModifyCategoryOrder } from '../../../utils/query/category-query'
 
 const MIN_BOUNDRY = 0
 
@@ -22,6 +24,10 @@ export const useGesture = (
   draggedItemId: SharedValue<string>,
   currentCategoryPositions: SharedValue<CategoryPositions>
 ) => {
+  const { mutate } = useModifyCategoryOrder()
+  const saveChanges = (newPositions: CategoryPositions) => {
+    mutate(newPositions)
+  }
   const MAX_BOUNDRY = (categoryCount - 1) * SORT_CATEGORY_ITEM_HEIGHT
   const { id, order } = item
   //used for swapping with currentIndex
@@ -151,6 +157,7 @@ export const useGesture = (
       console.log(currentCategoryPositions.value)
       //stop dragging
       isDragging.value = withDelay(200, withSpring(0))
+      runOnJS(saveChanges)(currentCategoryPositions.value)
     })
 
   const animatedStyles = useAnimatedStyle(() => {

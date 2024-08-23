@@ -2,7 +2,7 @@ import { Database } from '@nozbe/watermelondb'
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite'
 
 import schema from '../model/schema'
-import migrations from '../model/migrations'
+import migrations from '../migrations/migrations'
 import Transactions from '../model/transaction'
 import Category from '../model/category'
 
