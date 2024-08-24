@@ -27,7 +27,6 @@ export const styles = StyleSheet.create({
   subItemsContainer: {
     flex: 1,
     marginTop: 16,
-    paddingHorizontal: 16,
     rowGap: 16,
   },
   actionCtaContainer: {

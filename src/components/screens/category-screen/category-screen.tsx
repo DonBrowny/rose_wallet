@@ -2,11 +2,11 @@ import React from 'react'
 import { ActivityIndicator, Dimensions, StyleSheet, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { lightTheme } from '../../../theme/color'
-import { Cta } from '../../primary-cta/cta'
 import { Header } from '../../header/header'
 import { BOTTOM_TAB_HEIGHT, HEADER_HEIGHT } from '../../../schema/constants'
 import { useGetAllCategories } from '../../../utils/query/category-query'
 import { SortCategory } from '../../sort-category/sort-category'
+import AddCategory from '../../add-category/add-category'
 const { height: windowHeight } = Dimensions.get('window')
 
 const CTA_HEIGHT = 60
@@ -36,7 +36,7 @@ export const CategoryScreen = () => {
             )}
           </View>
           <View style={styles.ctaContainer}>
-            <Cta text='Add Category' />
+            <AddCategory />
           </View>
         </View>
       </View>

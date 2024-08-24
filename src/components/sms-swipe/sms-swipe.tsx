@@ -110,13 +110,15 @@ export const SmsSwipe = ({ data, category: categoryData }: SmsSwipeProps) => {
             name={'cross'}
             onPress={swipeLeftHandler}
           />
-          <TextInput
-            ref={textRef}
-            placeholder='Description (Optional)'
-            onChangeText={onTextChange}
-            numberOfLines={2}
-            multiline
-          />
+          <View style={styles.textDescription}>
+            <TextInput
+              ref={textRef}
+              placeholder='Description (Optional)'
+              onChangeText={onTextChange}
+              numberOfLines={2}
+              multiline
+            />
+          </View>
           <IconCta
             name={'check'}
             onPress={swipeRightHandler}
