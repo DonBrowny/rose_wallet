@@ -2,13 +2,14 @@ import { appSchema, tableSchema } from '@nozbe/watermelondb'
 import { TableName } from '../schema/tables'
 
 export default appSchema({
-  version: 1,
+  version: 2,
   tables: [
     tableSchema({
       name: TableName.CATEGORY,
       columns: [
         { name: 'name', type: 'string' },
         { name: 'icon', type: 'string' },
+        { name: 'order', type: 'number' },
       ],
     }),
     tableSchema({

@@ -12,7 +12,15 @@ interface CtaProps extends PressableProps {
   children?: React.ReactNode
 }
 
-export const Cta = ({ text, onPress, style, styleName = 'X_MEDIUM_MEDIUM', ctaStyle, children }: CtaProps) => {
+export const Cta = ({
+  text,
+  onPress,
+  style,
+  styleName = 'X_MEDIUM_MEDIUM',
+  ctaStyle,
+  children,
+  disabled,
+}: CtaProps) => {
   const scaleValue = useRef(new Animated.Value(1)).current
 
   function onPressIn() {
@@ -38,6 +46,7 @@ export const Cta = ({ text, onPress, style, styleName = 'X_MEDIUM_MEDIUM', ctaSt
         onPressOut={onPressOut}
         onPress={onPress}
         style={[styles.cta, ctaStyle]}
+        disabled={disabled}
       >
         {text ? <Text styleName={styleName}>{text}</Text> : null}
         {children}

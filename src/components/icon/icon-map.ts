@@ -23,14 +23,12 @@ import List from '../../../assets/svg/list.svg'
 import Bike from '../../../assets/svg/bike.svg'
 import Car from '../../../assets/svg/car.svg'
 import Maintenance from '../../../assets/svg/maintenance.svg'
-import Appliances from '../../../assets/svg/appliances.svg'
 import Gym from '../../../assets/svg/gym.svg'
-import Machine from '../../../assets/svg/machine.svg'
 import Beauty from '../../../assets/svg/beauty.svg'
 import HomeCategory from '../../../assets/svg/home-category.svg'
 import Bank from '../../../assets/svg/bank.svg'
 import Religion from '../../../assets/svg/religion.svg'
-import Fashion from '../../../assets/svg/fashion.svg'
+import Cloth from '../../../assets/svg/cloth.svg'
 import Sports from '../../../assets/svg/sports.svg'
 import Plant from '../../../assets/svg/plant.svg'
 import Water from '../../../assets/svg/water.svg'
@@ -43,6 +41,22 @@ import School from '../../../assets/svg/school.svg'
 import SchoolKit from '../../../assets/svg/school-kit.svg'
 import Drag from '../../../assets/svg/drag.svg'
 import Tax from '../../../assets/svg/tax.svg'
+import Color from '../../../assets/svg/color.svg'
+import Glass from '../../../assets/svg/glass.svg'
+import Ticket from '../../../assets/svg/ticket.svg'
+import Beer from '../../../assets/svg/beer.svg'
+import Camera from '../../../assets/svg/camera.svg'
+import Baby from '../../../assets/svg/baby.svg'
+import Plane from '../../../assets/svg/plane.svg'
+import Cake from '../../../assets/svg/cake.svg'
+import Jewelry from '../../../assets/svg/jewelry.svg'
+import Furniture from '../../../assets/svg/furniture.svg'
+import Teeth from '../../../assets/svg/teeth.svg'
+import Balance from '../../../assets/svg/balance.svg'
+import Newspaper from '../../../assets/svg/newspaper.svg'
+import Chip from '../../../assets/svg/chip.svg'
+import Lab from '../../../assets/svg/lab.svg'
+import Card from '../../../assets/svg/card.svg'
 
 export const IconMap = {
   reload: Reload,
@@ -70,14 +84,12 @@ export const IconMap = {
   bike: Bike,
   car: Car,
   maintenance: Maintenance,
-  appliances: Appliances,
   gym: Gym,
-  machine: Machine,
   beauty: Beauty,
   homeCategory: HomeCategory,
   bank: Bank,
   religion: Religion,
-  fashion: Fashion,
+  cloth: Cloth,
   sports: Sports,
   plant: Plant,
   water: Water,
@@ -90,4 +102,20 @@ export const IconMap = {
   schoolKit: SchoolKit,
   drag: Drag,
   tax: Tax,
+  color: Color,
+  glass: Glass,
+  ticket: Ticket,
+  beer: Beer,
+  camera: Camera,
+  baby: Baby,
+  plane: Plane,
+  cake: Cake,
+  jewelry: Jewelry,
+  furniture: Furniture,
+  teeth: Teeth,
+  balance: Balance,
+  newspaper: Newspaper,
+  chip: Chip,
+  lab: Lab,
+  card: Card,
 }

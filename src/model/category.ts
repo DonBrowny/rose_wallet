@@ -1,5 +1,5 @@
 import { Model, Query } from '@nozbe/watermelondb'
-import { children, text } from '@nozbe/watermelondb/decorators'
+import { children, field, text } from '@nozbe/watermelondb/decorators'
 import { TableName } from '../schema/tables'
 import type { IconMapKeyType } from '../schema/icons'
 import Transactions from './transaction'
@@ -12,6 +12,7 @@ export default class Category extends Model {
 
   @text('name') name!: string
   @text('icon') icon!: IconMapKeyType
+  @field('order') order!: number
 
   @children(TableName.TRANSACTION) transactions!: Query<Transactions>
 }

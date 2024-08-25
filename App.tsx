@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler'
 import React, { useCallback } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { HomeScreen } from './src/components/screens/home/home'
@@ -9,6 +10,8 @@ import { lightTheme } from './src/theme/color'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { History } from './src/components/screens/history/history'
 import { Screens } from './src/schema/screens'
+import { CategoryScreen } from './src/components/screens/category-screen/category-screen'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 const Tab = createBottomTabNavigator()
 const queryClient = new QueryClient()
@@ -17,30 +20,36 @@ function App(): React.JSX.Element {
   const renderTab = useCallback((props: BottomTabBarProps) => <TabBar {...props} />, [])
   return (
     <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
-        <StatusBar
-          animated={true}
-          backgroundColor={lightTheme.SECONDARY_BG}
-        />
-        <Tab.Navigator
-          initialRouteName='Home'
-          tabBar={renderTab}
-          screenOptions={{ headerShown: false }}
-        >
-          <Tab.Screen
-            name={Screens.HOME}
-            component={HomeScreen}
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <StatusBar
+            animated={true}
+            backgroundColor={lightTheme.SECONDARY_BG}
           />
-          <Tab.Screen
-            name={Screens.ADD_TRANSACTION}
-            component={AddExpenseScreen}
-          />
-          <Tab.Screen
-            name={Screens.TRANSACTION_HISTORY}
-            component={History}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
+          <Tab.Navigator
+            initialRouteName='Home'
+            tabBar={renderTab}
+            screenOptions={{ headerShown: false }}
+          >
+            <Tab.Screen
+              name={Screens.HOME}
+              component={HomeScreen}
+            />
+            <Tab.Screen
+              name={Screens.ADD_TRANSACTION}
+              component={AddExpenseScreen}
+            />
+            <Tab.Screen
+              name={Screens.TRANSACTION_HISTORY}
+              component={History}
+            />
+            <Tab.Screen
+              name={Screens.CATEGORY}
+              component={CategoryScreen}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </QueryClientProvider>
   )
 }

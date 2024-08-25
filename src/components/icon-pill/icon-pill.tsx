@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import { Icon, IconProps } from '../icon/icon'
 import { styles } from './icon-pill.styles'
 import { lightTheme } from '../../theme/color'
+import { ICON_PILL_ICON_SIZE } from '../../schema/constants'
 
 interface IconPillProps extends Pick<IconProps, 'name'> {
   color?: string
@@ -13,7 +14,7 @@ export const IconPill = ({ name, color }: IconPillProps) => {
   return (
     <View style={container}>
       <Icon
-        size={28}
+        size={ICON_PILL_ICON_SIZE}
         name={name}
         fill='#FFF'
       />
