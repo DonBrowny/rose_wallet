@@ -4,12 +4,24 @@ import { Cta } from '../primary-cta/cta'
 import { Text } from '../text/text'
 import { lightTheme } from '../../theme/color'
 import { TextInput } from '../text-input/text-input'
-import { CATEGORY_ICONS } from '../../schema/icons'
-import { Icon } from '../icon/icon'
+import { CATEGORY_ICONS, IconMapKeyType } from '../../schema/icons'
+import { AddCategoryItem } from './add-category-item/add-category-item'
+import { useAddCategoryOrder } from '../../utils/query/category-query'
 
 const AddCategory = () => {
+  const { mutate } = useAddCategoryOrder()
   const [modalVisible, setModalVisible] = useState(false)
-  const [number, onChangeNumber] = useState('')
+  const [categoryName, setCategoryName] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState<IconMapKeyType | null>(null)
+  const iconSelectHandler = useCallback((name: IconMapKeyType) => {
+    setSelectedCategory(name)
+  }, [])
+  const addCategoryHandler = useCallback(() => {
+    if (selectedCategory) {
+      mutate({ name: categoryName, icon: selectedCategory })
+      setModalVisible(false)
+    }
+  }, [categoryName, mutate, selectedCategory])
 
   const openModal = useCallback(() => {
     setModalVisible(true)
@@ -37,27 +49,25 @@ const AddCategory = () => {
           <View style={styles.modalView}>
             <Text styleName={'LARGE_BOLD'}>Add Category</Text>
             <TextInput
-              onChangeText={onChangeNumber}
-              value={number}
+              onChangeText={setCategoryName}
+              value={categoryName}
               placeholder='Category Name'
             />
+            <Text styleName='MEDIUM_SEMI_BOLD'>Pick a icon for Category</Text>
             <ScrollView contentContainerStyle={styles.itemContainer}>
               {CATEGORY_ICONS.map((name) => (
-                <View key={`cat-select-${name}`}>
-                  <Cta
-                    style={styles.iconContainer}
-                    onPress={() => {}}
-                  >
-                    <Icon
-                      fill={lightTheme.NEUTRAL_BORDER}
-                      name={name}
-                      size={36}
-                    />
-                  </Cta>
-                </View>
+                <AddCategoryItem
+                  key={`add-item-${name}`}
+                  name={name}
+                  isSelected={selectedCategory === name}
+                  onPress={iconSelectHandler}
+                />
               ))}
             </ScrollView>
-            <Cta>
+            <Cta
+              onPress={addCategoryHandler}
+              disabled={!categoryName || !selectedCategory}
+            >
               <Text styleName='X_MEDIUM_MEDIUM'>Add</Text>
             </Cta>
             <Cta
@@ -94,6 +104,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    rowGap: 8,
   },
   inputView: {
     height: 42,
@@ -107,11 +118,6 @@ const styles = StyleSheet.create({
   },
   buttonClose: {
     backgroundColor: lightTheme.SECONDARY_CTA_COLOR,
-    marginTop: 12,
-  },
-  iconContainer: {
-    width: 52,
-    height: 52,
-    borderRadius: 12,
+    marginTop: 8,
   },
 })

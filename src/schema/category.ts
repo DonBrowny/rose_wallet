@@ -1,9 +1,12 @@
 import type { IconMapKeyType } from './icons'
 
-export interface CategoryData {
-  id: string
+export interface AddCategoryData {
   name: string
   icon: IconMapKeyType
+}
+
+export interface CategoryData extends AddCategoryData {
+  id: string
   order: number
 }
 

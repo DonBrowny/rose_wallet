@@ -5,7 +5,7 @@ import { lightTheme } from '../../../theme/color'
 import { Header } from '../../header/header'
 import { BOTTOM_TAB_HEIGHT, HEADER_HEIGHT } from '../../../schema/constants'
 import { useGetAllCategories } from '../../../utils/query/category-query'
-import { SortCategory } from '../../sort-category/sort-category'
+import { SortCategoryMemo } from '../../sort-category/sort-category'
 import AddCategory from '../../add-category/add-category'
 const { height: windowHeight } = Dimensions.get('window')
 
@@ -16,16 +16,15 @@ const GRID_HEIGHT = windowHeight - CTA_HEIGHT - HEADER_HEIGHT - BOTTOM_TAB_HEIGH
 // const BOTTOM_BREAKPOINT = TOP_BREAKPOINT + GRID_HEIGHT
 
 export const CategoryScreen = () => {
-  const { data: category = [], isLoading } = useGetAllCategories()
-
+  const { data: category = [], isFetching } = useGetAllCategories()
   return (
     <GestureHandlerRootView>
       <View style={styles.container}>
         <Header text='Categories' />
         <View style={styles.innerContainer}>
           <View style={styles.scrollContainer}>
-            {!isLoading ? (
-              <SortCategory data={category} />
+            {!isFetching ? (
+              <SortCategoryMemo data={category} />
             ) : (
               <View style={styles.loadingContainer}>
                 <ActivityIndicator

@@ -1,6 +1,6 @@
 import { Q } from '@nozbe/watermelondb'
 import Category from '../../model/category'
-import type { CategoryData, CategoryPositions } from '../../schema/category'
+import type { AddCategoryData, CategoryData, CategoryPositions } from '../../schema/category'
 import { TableName } from '../../schema/tables'
 import { database } from '../db'
 import { useReactNavigationQuery } from './react-navigation-query'
@@ -13,14 +13,17 @@ export const getAllCategories = async () => {
   return categories
 }
 
-// const addCategory = async (name: string) => {
-//   await database.write(async () => {
-//     const newCategory = await categoryCollection.create((category) => {
-//       category.name = name
-//     })
-//     return newCategory
-//   })
-// }
+const addCategory = async ({ name, icon }: AddCategoryData) => {
+  await database.write(async () => {
+    const count = await categoryCollection.query().fetchCount()
+    const newCategory = await categoryCollection.create((category) => {
+      category.name = name
+      category.icon = icon
+      category.order = count // Since the order starts at 0
+    })
+    return newCategory
+  })
+}
 
 const modifyCategoryOrder = async (newPosition: CategoryPositions) => {
   const ids = Object.keys(newPosition)
@@ -57,6 +60,18 @@ export function useModifyCategoryOrder() {
   return useMutation({
     mutationFn: (newPosition: CategoryPositions) => {
       return modifyCategoryOrder(newPosition)
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [TableName.CATEGORY] })
+    },
+  })
+}
+
+export function useAddCategoryOrder() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (cat: AddCategoryData) => {
+      return await addCategory(cat)
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [TableName.CATEGORY] })
