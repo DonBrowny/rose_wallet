@@ -20,10 +20,10 @@ export function migrateCategoryOrder() {
   const query = ` UPDATE 
                     ${TableName.CATEGORY} 
                   SET 
-                    order=( CASE ${condition} 
+                    'order'=( CASE ${condition} 
                     END) 
                   WHERE 
-                    id in (${Object.keys(dbSeedValue[TableName.CATEGORY])})
+                    'id' in (${Object.keys(dbSeedValue[TableName.CATEGORY])})
                   `
   return unsafeExecuteSql(query)
 }
