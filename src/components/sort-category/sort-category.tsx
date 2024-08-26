@@ -20,7 +20,8 @@ const SortCategory = ({ data }: SortCategoryProps) => {
   // prevents the undefined error when a new category is added
   useEffect(() => {
     currentCategoryPositions.value = getInitialPositions(data)
-  }, [currentCategoryPositions, data, data.length])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data.length])
 
   return (
     <ScrollView contentContainerStyle={[styles.scrollContainer, { height: data.length * SORT_CATEGORY_ITEM_HEIGHT }]}>

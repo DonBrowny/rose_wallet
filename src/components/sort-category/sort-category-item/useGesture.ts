@@ -71,11 +71,11 @@ export const useGesture = (
     return isDraggingDerived.value && draggedItemIdDerived.value === id
   })
 
-  const getKeyOfValue = (value: number, obj: CategoryPositions): number | undefined => {
+  const getKeyOfValue = (value: number, obj: CategoryPositions): string | undefined => {
     'worklet'
     for (const [key, val] of Object.entries(obj)) {
       if (val.updatedOrder === value) {
-        return Number(key)
+        return key
       }
     }
     return undefined // Return undefined if the value is not found
