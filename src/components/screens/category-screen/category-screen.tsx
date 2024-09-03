@@ -7,6 +7,7 @@ import { BOTTOM_TAB_HEIGHT, HEADER_HEIGHT } from '../../../schema/constants'
 import { useGetAllCategories } from '../../../utils/query/category-query'
 import { SortCategoryMemo } from '../../sort-category/sort-category'
 import AddCategory from '../../add-category/add-category'
+import { Text } from '../../text/text'
 const { height: windowHeight } = Dimensions.get('window')
 
 const CTA_HEIGHT = 60
@@ -24,7 +25,15 @@ export const CategoryScreen = () => {
         <View style={styles.innerContainer}>
           <View style={styles.scrollContainer}>
             {!isFetching ? (
-              <SortCategoryMemo data={category} />
+              <>
+                <Text
+                  styleName='SMALL_NORMAL'
+                  textAlign='center'
+                >
+                  Drag & Drop to Sort the Categories
+                </Text>
+                <SortCategoryMemo data={category} />
+              </>
             ) : (
               <View style={styles.loadingContainer}>
                 <ActivityIndicator
@@ -65,7 +74,6 @@ export const styles = StyleSheet.create({
   scrollContainer: {
     width: '100%',
     height: GRID_HEIGHT,
-    flexDirection: 'row',
   },
   ctaContainer: {
     width: '80%',
