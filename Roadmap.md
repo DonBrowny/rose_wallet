@@ -5,8 +5,8 @@
 - [ ] Featured to edit expense
 
 ## Beta 2.0
-- [ ] Provision to add description to expense.
-- [ ] Feature to add category
+- [x] Provision to add description to expense.
+- [x] Feature to add category
 
 ## Beta 1.0
  - [x] Read SMS and filter expense related messages
