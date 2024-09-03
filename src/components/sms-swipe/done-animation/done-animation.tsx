@@ -6,7 +6,12 @@ import { Text } from '../../text/text'
 export const DoneAnimation = () => {
   return (
     <View style={styles.container}>
-      <Text styleName={'X_LARGE_BOLD'}>All Caught up!!</Text>
+      <Text
+        textAlign='center'
+        styleName='LARGE_SEMI_BOLD'
+      >
+        All Caught up &#128526; !!
+      </Text>
       <LottieView
         source={require('../../../../assets/confetti.json')}
         autoPlay={true}
@@ -21,6 +26,8 @@ export const DoneAnimation = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   lottie: {
     position: 'absolute',
